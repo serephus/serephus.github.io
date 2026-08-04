@@ -1,0 +1,45 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 0083 - Remove Duplicates from Sorted List</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><h1>0083 - Remove Duplicates from Sorted List</h1></header><div class=post-content><h3 id=problem><a rel="noopener external" href=https://leetcode.com/problems/remove-duplicates-from-sorted-list/ target=_blank>problem</a></h3><p>Given the <code>head</code> of a sorted linked list, <em>delete all duplicates such that each element appears only once</em>. Return <em>the linked list <strong>sorted</strong> as well</em>.<p> <p><strong class=example>Example 1:</strong></p><img alt src=https://assets.leetcode.com/uploads/2021/01/04/list1.jpg style=width:302px;height:242px><pre>
+<strong>Input:</strong> head = [1,1,2]
+<strong>Output:</strong> [1,2]
+</pre><p><strong class=example>Example 2:</strong></p><img alt src=https://assets.leetcode.com/uploads/2021/01/04/list2.jpg style=width:542px;height:222px><pre>
+<strong>Input:</strong> head = [1,1,2,3,3]
+<strong>Output:</strong> [1,2,3]
+</pre><p> <p><strong>Constraints:</strong><ul><li>The number of nodes in the list is in the range <code>[0, 300]</code>.<li><code>-100 &lt;= Node.val &lt;= 100</code><li>The list is guaranteed to be <strong>sorted</strong> in ascending order.</ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#928374;font-style:italic>// Definition for singly-linked list.</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// #[derive(PartialEq, Eq, Clone, Debug)]</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// pub struct ListNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub val: i32,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub next: Option&lt;Box&lt;ListNode>></span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// </span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// impl ListNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   #[inline]</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   fn new(val: i32) -> Self {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//     ListNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//       next: None,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//       val</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//     }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// iterative removal</span></span>
+<span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> delete_duplicates</span><span style=color:#a89984>(</span><span style=color:#fe8019>mut</span><span style=color:#83a598> head</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> Option</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>Box</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>ListNode</span><span style=color:#a89984>>>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> Option</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>Box</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>ListNode</span><span style=color:#a89984>>> {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // the left pointer</span></span>
+<span class=giallo-l><span style=color:#fe8019>        let mut</span><span style=color:#83a598> curr_opt</span><span style=color:#8ec07c> =</span><span style=color:#83a598> head</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>as_mut</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#fb4934>        while</span><span style=color:#fe8019> let</span><span style=color:#fabd2f> Some</span><span style=color:#a89984>(</span><span style=color:#83a598>curr</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#83a598> curr_opt</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // take next node out since we can't have two mutable</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // reference of the same list</span></span>
+<span class=giallo-l><span style=color:#fe8019>            let mut</span><span style=color:#83a598> next_opt</span><span style=color:#8ec07c> =</span><span style=color:#83a598> curr</span><span style=color:#8ec07c>.</span><span>next</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>take</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // keep iterate until we reach the end or a different value</span></span>
+<span class=giallo-l><span style=color:#fb4934>            while</span><span style=color:#fe8019> let</span><span style=color:#fabd2f> Some</span><span style=color:#a89984>(</span><span style=color:#83a598>next</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#83a598> next_opt</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>as_mut</span><span style=color:#a89984>()</span><span style=color:#fb4934> &&</span><span style=color:#83a598> next</span><span style=color:#8ec07c>.</span><span>val </span><span style=color:#8ec07c>==</span><span style=color:#83a598> curr</span><span style=color:#8ec07c>.</span><span>val </span><span style=color:#a89984>{</span></span>
+<span class=giallo-l><span style=color:#83a598>                next_opt</span><span style=color:#8ec07c> =</span><span style=color:#83a598> next</span><span style=color:#8ec07c>.</span><span>next</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>take</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#a89984>            }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // we took next out, now insert it back</span></span>
+<span class=giallo-l><span style=color:#83a598>            curr</span><span style=color:#8ec07c>.</span><span>next </span><span style=color:#8ec07c>=</span><span style=color:#83a598> next_opt</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // step to next node, which is different value or null</span></span>
+<span class=giallo-l><span style=color:#83a598>            curr_opt</span><span style=color:#8ec07c> =</span><span style=color:#83a598> curr</span><span style=color:#8ec07c>.</span><span>next</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>as_mut</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#a89984>        }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // we haven't allocate anything, so return the original head</span></span>
+<span class=giallo-l><span style=color:#83a598>        head</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>

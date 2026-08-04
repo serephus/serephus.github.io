@@ -1,0 +1,39 @@
+:root {  
+  --gruvbox-bg: #3c3836;  
+  --gruvbox-fg: #ebdbb2;  
+}  
+  
+.giallo-l {
+    display: inline-block;
+    min-height: 1lh;
+    width: 100%;
+}
+.giallo-ln {
+    display: inline-block;
+    user-select: none;
+    margin-right: 0.4em;
+    padding: 0.4em;
+    min-width: 3ch;
+    text-align: right;
+    opacity: 0.8;
+}
+
+code:not(pre code) {  
+  background-color: var(--gruvbox-bg);  
+  color: var(--gruvbox-fg);  
+  padding: 0.125rem 0.25rem;  
+  border-radius: var(--standard-border-radius);  
+}
+
+blockquote {  
+  background-color: var(--bg-light);  
+  padding: 1rem 1.25rem;  
+  border-radius: var(--standard-border-radius);  
+  border-inline-start: 0.5rem solid var(--accent);  
+  font-style: normal;  
+  margin: 1rem 0;  
+}  
+  
+blockquote p {  
+  margin: 0;  
+}

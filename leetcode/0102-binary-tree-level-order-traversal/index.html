@@ -1,0 +1,61 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 0102 - Binary Tree Level Order Traversal</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><h1>0102 - Binary Tree Level Order Traversal</h1></header><div class=post-content><h3 id=problem><a rel="noopener external" href=https://leetcode.com/problems/binary-tree-level-order-traversal/ target=_blank>problem</a></h3><p>Given the <code>root</code> of a binary tree, return <em>the level order traversal of its nodes' values</em>. (i.e., from left to right, level by level).<p> <p><strong class=example>Example 1:</strong></p><img alt src=https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg style=width:277px;height:302px><pre>
+<strong>Input:</strong> root = [3,9,20,null,null,15,7]
+<strong>Output:</strong> [[3],[9,20],[15,7]]
+</pre><p><strong class=example>Example 2:</strong><pre>
+<strong>Input:</strong> root = [1]
+<strong>Output:</strong> [[1]]
+</pre><p><strong class=example>Example 3:</strong><pre>
+<strong>Input:</strong> root = []
+<strong>Output:</strong> []
+</pre><p> <p><strong>Constraints:</strong><ul><li>The number of nodes in the tree is in the range <code>[0, 2000]</code>.<li><code>-1000 &lt;= Node.val &lt;= 1000</code></ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#928374;font-style:italic>// Definition for a binary tree node.</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// #[derive(Debug, PartialEq, Eq)]</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// pub struct TreeNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub val: i32,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub left: Option&lt;Rc&lt;RefCell&lt;TreeNode>>>,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub right: Option&lt;Rc&lt;RefCell&lt;TreeNode>>>,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// </span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// impl TreeNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   #[inline]</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub fn new(val: i32) -> Self {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//     TreeNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//       val,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//       left: None,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//       right: None</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//     }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#fb4934>use</span><span style=color:#fabd2f> std</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>cell</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>RefCell</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#fb4934>use</span><span style=color:#fabd2f> std</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>rc</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>Rc</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// BFS with alternating queues</span></span>
+<span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> level_order</span><span style=color:#a89984>(</span><span style=color:#83a598>root</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> Option</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>Rc</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>RefCell</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>TreeNode</span><span style=color:#a89984>>>>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> Vec</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>Vec</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>i32</span><span style=color:#a89984>>> {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // alternating "queues"</span></span>
+<span class=giallo-l><span style=color:#fe8019>        let</span><span style=color:#a89984> (</span><span style=color:#fe8019>mut</span><span style=color:#83a598> queue</span><span style=color:#a89984>,</span><span style=color:#fe8019> mut</span><span style=color:#83a598> swp</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#a89984> (</span><span style=color:#fabd2f>vec!</span><span style=color:#a89984>[],</span><span style=color:#fabd2f> vec!</span><span style=color:#a89984>[]);</span></span>
+<span class=giallo-l><span style=color:#fe8019>        let mut</span><span style=color:#83a598> ans</span><span style=color:#8ec07c> =</span><span style=color:#fabd2f> vec!</span><span style=color:#a89984>[];</span></span>
+<span class=giallo-l><span style=color:#fb4934>        if</span><span style=color:#fe8019> let</span><span style=color:#fabd2f> Some</span><span style=color:#a89984>(</span><span style=color:#83a598>node</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#83a598> root</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#83a598>            queue</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>push</span><span style=color:#a89984>(</span><span style=color:#83a598>node</span><span style=color:#a89984>);</span></span>
+<span class=giallo-l><span style=color:#a89984>        }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // outer loop</span></span>
+<span class=giallo-l><span style=color:#fb4934>        while !</span><span style=color:#83a598>queue</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>is_empty</span><span style=color:#a89984>() {</span></span>
+<span class=giallo-l><span style=color:#fe8019>            let mut</span><span style=color:#83a598> level</span><span style=color:#8ec07c> =</span><span style=color:#fabd2f> vec!</span><span style=color:#a89984>[];</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // we need to reverse the vec since vec is filo</span></span>
+<span class=giallo-l><span style=color:#83a598>            queue</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>reverse</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // inner loop</span></span>
+<span class=giallo-l><span style=color:#fb4934>            while</span><span style=color:#fe8019> let</span><span style=color:#fabd2f> Some</span><span style=color:#a89984>(</span><span style=color:#83a598>node</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#83a598> queue</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>pop</span><span style=color:#a89984>() {</span></span>
+<span class=giallo-l><span style=color:#fe8019>                let</span><span style=color:#83a598> node</span><span style=color:#8ec07c> =</span><span style=color:#83a598> node</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>borrow</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#83a598>                level</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>push</span><span style=color:#a89984>(</span><span style=color:#83a598>node</span><span style=color:#8ec07c>.</span><span>val</span><span style=color:#a89984>);</span></span>
+<span class=giallo-l><span style=color:#fb4934>                if</span><span style=color:#fe8019> let</span><span style=color:#fabd2f> Some</span><span style=color:#a89984>(</span><span style=color:#83a598>left</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#83a598> node</span><span style=color:#8ec07c>.</span><span>left</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>clone</span><span style=color:#a89984>() {</span></span>
+<span class=giallo-l><span style=color:#83a598>                    swp</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>push</span><span style=color:#a89984>(</span><span style=color:#83a598>left</span><span style=color:#a89984>);</span></span>
+<span class=giallo-l><span style=color:#a89984>                }</span></span>
+<span class=giallo-l><span style=color:#fb4934>                if</span><span style=color:#fe8019> let</span><span style=color:#fabd2f> Some</span><span style=color:#a89984>(</span><span style=color:#83a598>right</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#83a598> node</span><span style=color:#8ec07c>.</span><span>right</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>clone</span><span style=color:#a89984>() {</span></span>
+<span class=giallo-l><span style=color:#83a598>                    swp</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>push</span><span style=color:#a89984>(</span><span style=color:#83a598>right</span><span style=color:#a89984>);</span></span>
+<span class=giallo-l><span style=color:#a89984>                }</span></span>
+<span class=giallo-l><span style=color:#a89984>            }</span></span>
+<span class=giallo-l><span style=color:#fabd2f>            std</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>mem</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>swap</span><span style=color:#a89984>(</span><span style=color:#8ec07c>&</span><span style=color:#fe8019>mut</span><span style=color:#83a598> queue</span><span style=color:#a89984>,</span><span style=color:#8ec07c> &</span><span style=color:#fe8019>mut</span><span style=color:#83a598> swp</span><span style=color:#a89984>);</span></span>
+<span class=giallo-l><span style=color:#83a598>            ans</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>push</span><span style=color:#a89984>(</span><span style=color:#83a598>level</span><span style=color:#a89984>);</span></span>
+<span class=giallo-l><span style=color:#a89984>        }</span></span>
+<span class=giallo-l><span style=color:#83a598>        ans</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>

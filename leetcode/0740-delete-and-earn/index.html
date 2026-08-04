@@ -1,0 +1,44 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 0740 - Delete and Earn</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><h1>0740 - Delete and Earn</h1></header><div class=post-content><h3 id=problem><a rel="noopener external" href=https://leetcode.com/problems/delete-and-earn/ target=_blank>problem</a></h3><p>You are given an integer array <code>nums</code>. You want to maximize the number of points you get by performing the following operation any number of times:<ul><li>Pick any <code>nums[i]</code> and delete it to earn <code>nums[i]</code> points. Afterwards, you must delete <b>every</b> element equal to <code>nums[i] - 1</code> and <strong>every</strong> element equal to <code>nums[i] + 1</code>.</ul><p>Return <em>the <strong>maximum number of points</strong> you can earn by applying the above operation some number of times</em>.<p> <p><strong class=example>Example 1:</strong><pre>
+<strong>Input:</strong> nums = [3,4,2]
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> You can perform the following operations:
+- Delete 4 to earn 4 points. Consequently, 3 is also deleted. nums = [2].
+- Delete 2 to earn 2 points. nums = [].
+You earn a total of 6 points.
+</pre><p><strong class=example>Example 2:</strong><pre>
+<strong>Input:</strong> nums = [2,2,3,3,3,4]
+<strong>Output:</strong> 9
+<strong>Explanation:</strong> You can perform the following operations:
+- Delete a 3 to earn 3 points. All 2's and 4's are also deleted. nums = [3,3].
+- Delete a 3 again to earn 3 points. nums = [3].
+- Delete a 3 once more to earn 3 points. nums = [].
+You earn a total of 9 points.</pre><p> <p><strong>Constraints:</strong><ul><li><code>1 &lt;= nums.length &lt;= 2 * 10<sup>4</sup></code><li><code>1 &lt;= nums[i] &lt;= 10<sup>4</sup></code></ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#928374;font-style:italic>// we solve this by state machine thinking</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// first we collect numbers by their value</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// then we iterate through each of them</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// in each step, we have several state and corresponding</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// options</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// take: we have taken the previous number, we can only skip</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// the current one, after the current one, we transition to</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// skip state.</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// skip: we have not taken the previous number, in turn we can</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// take the current number, and we must choose take the current</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// number or not, so we compare take & (skip + current), and</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// choose the maxmium</span></span>
+<span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> delete_and_earn</span><span style=color:#a89984>(</span><span style=color:#83a598>nums</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> Vec</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>i32</span><span style=color:#a89984>>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> i32</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // by question constraints, we have 10000</span></span>
+<span class=giallo-l><span style=color:#fe8019>        let mut</span><span style=color:#83a598> cnt</span><span style=color:#8ec07c> =</span><span style=color:#fabd2f> vec!</span><span style=color:#a89984>[</span><span style=color:#d3869b>0</span><span style=color:#a89984>;</span><span style=color:#d3869b> 10001</span><span style=color:#a89984>];</span></span>
+<span class=giallo-l><span style=color:#fb4934>        for</span><span style=color:#83a598> n</span><span style=color:#fb4934> in</span><span style=color:#83a598> nums</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#83a598>            cnt</span><span style=color:#a89984>[</span><span style=color:#83a598>n</span><span style=color:#fb4934> as</span><span style=color:#fabd2f> usize</span><span style=color:#a89984>]</span><span style=color:#8ec07c> +=</span><span style=color:#83a598> n</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#a89984>        }</span></span>
+<span class=giallo-l><span style=color:#83a598>        cnt</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>into_iter</span><span style=color:#a89984>()</span></span>
+<span class=giallo-l><span style=color:#8ec07c>            .</span><span style=color:#fabd2f>fold</span><span style=color:#a89984>((</span><span style=color:#d3869b>0</span><span style=color:#a89984>,</span><span style=color:#d3869b> 0</span><span style=color:#a89984>),</span><span style=color:#fb4934> |</span><span style=color:#a89984>(</span><span style=color:#83a598>skip</span><span style=color:#a89984>,</span><span style=color:#83a598> take</span><span style=color:#a89984>),</span><span style=color:#83a598> val</span><span style=color:#fb4934>|</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>                // take -> skip</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>                // max(take, skip + val) -> take</span></span>
+<span class=giallo-l><span style=color:#a89984>                (</span><span style=color:#83a598>take</span><span style=color:#a89984>,</span><span style=color:#83a598> take</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>max</span><span style=color:#a89984>(</span><span style=color:#83a598>skip</span><span style=color:#8ec07c> +</span><span style=color:#83a598> val</span><span style=color:#a89984>))</span></span>
+<span class=giallo-l><span style=color:#a89984>            })</span></span>
+<span class=giallo-l><span style=color:#8ec07c>            .</span><span style=color:#d3869b>1</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // from our transition we can see take is always</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // bigger than skip</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>
