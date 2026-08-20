@@ -1,0 +1,29 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 1720 - Decode XORed Array</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><script type=application/ld+json>
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "1720 - Decode XORed Array",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Serephus"
+    },
+    
+    
+    "description": "",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Serephus"
+    }
+}
+</script><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><h1>1720 - Decode XORed Array</h1></header><div class=post-content><h3 id=problem><a rel="noopener external" href=https://leetcode.com/problems/decode-xored-array/ target=_blank>problem</a></h3><p>There is a <strong>hidden</strong> integer array <code>arr</code> that consists of <code>n</code> non-negative integers.<p>It was encoded into another integer array <code>encoded</code> of length <code>n - 1</code>, such that <code>encoded[i] = arr[i] XOR arr[i + 1]</code>. For example, if <code>arr = [1,0,2,1]</code>, then <code>encoded = [1,2,3]</code>.<p>You are given the <code>encoded</code> array. You are also given an integer <code>first</code>, that is the first element of <code>arr</code>, i.e. <code>arr[0]</code>.<p>Return <em>the original array</em> <code>arr</code>. It can be proved that the answer exists and is unique.<p><strong>Example 1:</strong><p><strong>Input:</strong> encoded = [1,2,3], first = 1 <strong>Output:</strong> [1,0,2,1] <strong>Explanation:</strong> If arr = [1,0,2,1], then first = 1 and encoded = [1 XOR 0, 0 XOR 2, 2 XOR 1] = [1,2,3]<p><strong>Example 2:</strong><p><strong>Input:</strong> encoded = [6,2,7,3], first = 4 <strong>Output:</strong> [4,2,0,7,4]<p><strong>Constraints:</strong><ul><li><code>2 &lt;= n &lt;= 10^4^</code><li><code>encoded.length == n - 1</code><li><code>0 &lt;= encoded[i] &lt;= 10^5^</code><li><code>0 &lt;= first &lt;= 10^5^</code></ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> decode</span><span style=color:#a89984>(</span><span style=color:#83a598>encoded</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> Vec</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>i32</span><span style=color:#a89984>>,</span><span style=color:#83a598> first</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> i32</span><span style=color:#a89984>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> Vec</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>i32</span><span style=color:#a89984>> {</span></span>
+<span class=giallo-l><span style=color:#fabd2f>        std</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>iter</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>once</span><span style=color:#a89984>(</span><span style=color:#83a598>first</span><span style=color:#a89984>)</span></span>
+<span class=giallo-l><span style=color:#8ec07c>            .</span><span style=color:#fabd2f>chain</span><span style=color:#a89984>(</span><span style=color:#83a598>encoded</span><span style=color:#a89984>)</span></span>
+<span class=giallo-l><span style=color:#8ec07c>            .</span><span style=color:#fabd2f>scan</span><span style=color:#a89984>(</span><span style=color:#d3869b>0</span><span style=color:#a89984>,</span><span style=color:#fb4934> |</span><span style=color:#83a598>state</span><span style=color:#a89984>,</span><span style=color:#83a598> val</span><span style=color:#fb4934>|</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#8ec07c>                *</span><span style=color:#83a598>state</span><span style=color:#8ec07c> ^=</span><span style=color:#83a598> val</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#fabd2f>                Some</span><span style=color:#a89984>(</span><span style=color:#8ec07c>*</span><span style=color:#83a598>state</span><span style=color:#a89984>)</span></span>
+<span class=giallo-l><span style=color:#a89984>            })</span></span>
+<span class=giallo-l><span style=color:#8ec07c>            .</span><span style=color:#fabd2f>collect</span><span style=color:#a89984>()</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>

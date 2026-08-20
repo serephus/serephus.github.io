@@ -1,0 +1,56 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 3217 - Delete Nodes From Linked List Present in Array</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><script type=application/ld+json>
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "3217 - Delete Nodes From Linked List Present in Array",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Serephus"
+    },
+    
+    
+    "description": "",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Serephus"
+    }
+}
+</script><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><h1>3217 - Delete Nodes From Linked List Present in Array</h1></header><div class=post-content><h3 id=problem><a rel="noopener external" href=https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/ target=_blank>problem</a></h3><p>You are given an array of integers <code>nums</code> and the <code>head</code> of a linked list. Return the <code>head</code> of the modified linked list after <strong>removing</strong> all nodes from the linked list that have a value that exists in <code>nums</code>.<p><strong>Example 1:</strong><p><strong>Input:</strong> nums = [1,2,3], head = [1,2,3,4,5]<p><strong>Output:</strong> [4,5]<p><strong>Explanation:</strong><p><strong><img alt src=https://assets.leetcode.com/uploads/2024/06/11/linkedlistexample0.png></strong><p>Remove the nodes with values 1, 2, and 3.<p><strong>Example 2:</strong><p><strong>Input:</strong> nums = [1], head = [1,2,1,2,1,2]<p><strong>Output:</strong> [2,2,2]<p><strong>Explanation:</strong><p><img alt src=https://assets.leetcode.com/uploads/2024/06/11/linkedlistexample1.png><p>Remove the nodes with value 1.<p><strong>Example 3:</strong><p><strong>Input:</strong> nums = [5], head = [1,2,3,4]<p><strong>Output:</strong> [1,2,3,4]<p><strong>Explanation:</strong><p><strong><img alt src=https://assets.leetcode.com/uploads/2024/06/11/linkedlistexample2.png></strong><p>No node has value 5.<p><strong>Constraints:</strong><ul><li><code>1 &lt;= nums.length &lt;= 10^5^</code><li><code>1 &lt;= nums[i] &lt;= 10^5^</code><li>All elements in <code>nums</code> are unique.<li>The number of nodes in the given list is in the range <code>[1, 10^5^]</code>.<li><code>1 &lt;= Node.val &lt;= 10^5^</code><li>The input is generated such that there is at least one node in the linked list that has a value not present in <code>nums</code>.</ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#928374;font-style:italic>// Definition for singly-linked list.</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// #[derive(PartialEq, Eq, Clone, Debug)]</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// pub struct ListNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub val: i32,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   pub next: Option&lt;Box&lt;ListNode>></span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// </span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// impl ListNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   #[inline]</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   fn new(val: i32) -> Self {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//     ListNode {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//       next: None,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//       val</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//     }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>//   }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// }</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// rust solution focused on simplicity</span></span>
+<span class=giallo-l><span style=color:#fb4934>use</span><span style=color:#fabd2f> std</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>collections</span><span style=color:#8ec07c>::</span><span style=color:#fabd2f>HashSet</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> modified_list</span><span style=color:#a89984>(</span></span>
+<span class=giallo-l><span style=color:#83a598>        nums</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> Vec</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>i32</span><span style=color:#a89984>>,</span></span>
+<span class=giallo-l><span style=color:#fe8019>        mut</span><span style=color:#83a598> head</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> Option</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>Box</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>ListNode</span><span style=color:#a89984>>>,</span></span>
+<span class=giallo-l><span style=color:#a89984>    )</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> Option</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>Box</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>ListNode</span><span style=color:#a89984>>> {</span></span>
+<span class=giallo-l><span style=color:#fe8019>        let mut</span><span style=color:#83a598> dummy</span><span style=color:#8ec07c> =</span><span style=color:#fabd2f> None</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#fe8019>        let mut</span><span style=color:#83a598> chain</span><span style=color:#8ec07c> = &</span><span style=color:#fe8019>mut</span><span style=color:#83a598> dummy</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#fe8019>        let</span><span style=color:#83a598> nums</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> HashSet</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>i32</span><span style=color:#a89984>></span><span style=color:#8ec07c> =</span><span style=color:#83a598> nums</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>into_iter</span><span style=color:#a89984>()</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>collect</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // take a node from the list</span></span>
+<span class=giallo-l><span style=color:#fb4934>        while</span><span style=color:#fe8019> let</span><span style=color:#fabd2f> Some</span><span style=color:#a89984>(</span><span style=color:#fe8019>mut</span><span style=color:#83a598> node</span><span style=color:#a89984>)</span><span style=color:#8ec07c> =</span><span style=color:#83a598> head</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>take</span><span style=color:#a89984>() {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>            // use the next node as list head</span></span>
+<span class=giallo-l><span style=color:#83a598>            head</span><span style=color:#8ec07c> =</span><span style=color:#83a598> node</span><span style=color:#8ec07c>.</span><span>next</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>take</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#fb4934>            if !</span><span style=color:#83a598>nums</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>contains</span><span style=color:#a89984>(</span><span style=color:#8ec07c>&</span><span style=color:#83a598>node</span><span style=color:#8ec07c>.</span><span>val</span><span style=color:#a89984>) {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>                // insert back if ...</span></span>
+<span class=giallo-l><span style=color:#83a598>                chain</span><span style=color:#8ec07c> = &</span><span style=color:#fe8019>mut</span><span style=color:#83a598> chain</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>insert</span><span style=color:#a89984>(</span><span style=color:#83a598>node</span><span style=color:#a89984>)</span><span style=color:#8ec07c>.</span><span>next</span><span style=color:#a89984>;</span></span>
+<span class=giallo-l><span style=color:#a89984>            }</span></span>
+<span class=giallo-l><span style=color:#a89984>        }</span></span>
+<span class=giallo-l><span style=color:#83a598>        dummy</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>
