@@ -1,0 +1,33 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 1518 - Water Bottles</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><script type=application/ld+json>
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "1518 - Water Bottles",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Serephus"
+    },
+    
+    
+    "datePublished": "2026-07-22T10:49:08",
+    
+    "description": "",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Serephus"
+    }
+}
+</script><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><time datetime=2026-07-22T10:49:08>Published on: <span class=accent-data>2026-07-22</span> </time><h1>1518 - Water Bottles</h1></header><div class=post-content><h3 id=description-leetcode>Description (<a rel="noopener external" href=https://leetcode.com/problems/water-bottles/ target=_blank>leetcode</a>)</h3><p>There are <code>numBottles</code> water bottles that are initially full of water. You can exchange <code>numExchange</code> empty water bottles from the market with one full water bottle.<p>The operation of drinking a full water bottle turns it into an empty bottle.<p>Given the two integers <code>numBottles</code> and <code>numExchange</code>, return <em>the <strong>maximum</strong> number of water bottles you can drink</em>.<p><strong>Example 1:</strong><p><img alt src=/images/water-bottles/sample_1_1875.png><p><strong>Input:</strong> numBottles = 9, numExchange = 3<p><strong>Output:</strong> 13<p><strong>Explanation:</strong> You can exchange 3 empty bottles to get 1 full water bottle.<p>Number of water bottles you can drink: 9 + 3 + 1 = 13.<p><strong>Example 2:</strong><p><img alt src=/images/water-bottles/sample_2_1875.png><p><strong>Input:</strong> numBottles = 15, numExchange = 4<p><strong>Output:</strong> 19<p><strong>Explanation:</strong> You can exchange 4 empty bottles to get 1 full water bottle.<p>Number of water bottles you can drink: 15 + 3 + 1 = 19.<p><strong>Constraints:</strong><ul><li><code>1 &lt;= numBottles &lt;= 100</code><li><code>2 &lt;= numExchange &lt;= 100</code></ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // we could solve this by simulate and it is absolutely ok</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // however this is a much clever solution</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // think a full bottle as 1 bottle + 1 water</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // we exchange k bottle to 1 bottle + 1 water</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // effectively we have: (k - 1) bottle = 1 water</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // after the process, we'll have at least 1 bottle</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // initially we have n water and n bottle, so</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>    // we have: n + floor((n - 1) / (k - 1))</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> num_water_bottles</span><span style=color:#a89984>(</span><span style=color:#83a598>n</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> i32</span><span style=color:#a89984>,</span><span style=color:#83a598> k</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> i32</span><span style=color:#a89984>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> i32</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#83a598>        n</span><span style=color:#8ec07c> +</span><span style=color:#a89984> (</span><span style=color:#83a598>n</span><span style=color:#8ec07c> -</span><span style=color:#d3869b> 1</span><span style=color:#a89984>)</span><span style=color:#8ec07c> /</span><span style=color:#a89984> (</span><span style=color:#83a598>k</span><span style=color:#8ec07c> -</span><span style=color:#d3869b> 1</span><span style=color:#a89984>)</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div><div class=post-tags><a class=tag href=/tags/easy>#Easy </a><a class=tag href=/tags/math>#Math </a><a class=tag href=/tags/simulation>#Simulation </a></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>

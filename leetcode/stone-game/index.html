@@ -1,0 +1,31 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 0877 - Stone Game</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><script type=application/ld+json>
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "0877 - Stone Game",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Serephus"
+    },
+    
+    
+    "datePublished": "2026-08-03T02:15:49",
+    
+    "description": "",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Serephus"
+    }
+}
+</script><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><time datetime=2026-08-03T02:15:49>Published on: <span class=accent-data>2026-08-03</span> </time><h1>0877 - Stone Game</h1></header><div class=post-content><h3 id=description-leetcode>Description (<a rel="noopener external" href=https://leetcode.com/problems/stone-game/ target=_blank>leetcode</a>)</h3><p>Alice and Bob play a game with piles of stones. There are an <strong>even</strong> number of piles arranged in a row, and each pile has a <strong>positive</strong> integer number of stones <code>piles[i]</code>.<p>The objective of the game is to end with the most stones. The <strong>total</strong> number of stones across all the piles is <strong>odd</strong>, so there are no ties.<p>Alice and Bob take turns, with <strong>Alice starting first</strong>. Each turn, a player takes the entire pile of stones either from the <strong>beginning</strong> or from the <strong>end</strong> of the row. This continues until there are no more piles left, at which point the person with the <strong>most stones wins</strong>.<p>Assuming Alice and Bob play optimally, return <code>true</code> <em>if Alice wins the game, or</em> <code>false</code> <em>if Bob wins</em>.<p><strong>Example 1:</strong><p><strong>Input:</strong> piles = [5,3,4,5]<p><strong>Output:</strong> true<p><strong>Explanation:</strong><p>Alice starts first, and can only take the first 5 or the last 5.<p>Say she takes the first 5, so that the row becomes [3, 4, 5].<p>If Bob takes 3, then the board is [4, 5], and Alice takes 5 to win with 10 points.<p>If Bob takes the last 5, then the board is [3, 4], and Alice takes 4 to win with 9 points.<p>This demonstrated that taking the first 5 was a winning move for Alice, so we return true.<p><strong>Example 2:</strong><p><strong>Input:</strong> piles = [3,7,2,3]<p><strong>Output:</strong> true<p><strong>Constraints:</strong><ul><li><code>2 &lt;= piles.length &lt;= 500</code><li><code>piles.length</code> is <strong>even</strong>.<li><code>1 &lt;= piles[i] &lt;= 500</code><li><code>sum(piles[i])</code> is <strong>odd</strong>.</ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> stone_game</span><span style=color:#a89984>(</span><span style=color:#83a598>piles</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> Vec</span><span style=color:#a89984>&lt;</span><span style=color:#fabd2f>i32</span><span style=color:#a89984>>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> bool</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // it is actually not obvious that alice will always win</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // let think it this way</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // Alice always wins because she can force the game to take all piles</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // from either the even or odd positions, and since the total is odd,</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // one group has more stones.</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // So she just picks the larger group and mirrors Bob's moves</span></span>
+<span class=giallo-l><span style=color:#d3869b>        true</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div><div class=post-tags><a class=tag href=/tags/medium>#Medium </a><a class=tag href=/tags/array>#Array </a><a class=tag href=/tags/math>#Math </a><a class=tag href=/tags/dynamic-programming>#Dynamic Programming </a><a class=tag href=/tags/minimax>#Minimax </a><a class=tag href=/tags/game-theory>#Game Theory </a><a class=tag href=/tags/zero-sum-game>#Zero-Sum Game </a></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>
