@@ -1,0 +1,26 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 3019 - Number of Changing Keys</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><script type=application/ld+json>
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "3019 - Number of Changing Keys",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Serephus"
+    },
+    
+    
+    "datePublished": "2026-09-10T06:49:52",
+    
+    "description": "",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Serephus"
+    }
+}
+</script><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><time datetime=2026-09-10T06:49:52>Published on: <span class=accent-data>2026-09-10</span> </time><h1>3019 - Number of Changing Keys</h1></header><div class=post-content><h3 id=description-leetcode>Description (<a rel="noopener external" href=https://leetcode.com/problems/number-of-changing-keys/ target=_blank>leetcode</a>)</h3><p>You are given a <strong>0-indexed</strong> string <code>s</code> typed by a user. Changing a key is defined as using a key different from the last used key. For example, <code>s = "ab"</code> has a change of a key while <code>s = "bBBb"</code> does not have any.<p>Return <em>the number of times the user had to change the key.</em><p><strong>Note:</strong> Modifiers like <code>shift</code> or <code>caps lock</code> won’t be counted in changing the key that is if a user typed the letter <code>'a'</code> and then the letter <code>'A'</code> then it will not be considered as a changing of key.<p><strong>Example 1:</strong><p><strong>Input:</strong> s = “aAbBcC”<p><strong>Output:</strong> 2<p><strong>Explanation:</strong><p>From s[0] = ‘a’ to s[1] = ‘A’, there is no change of key as caps lock or shift is not counted.<p>From s[1] = ‘A’ to s[2] = ‘b’, there is a change of key.<p>From s[2] = ‘b’ to s[3] = ‘B’, there is no change of key as caps lock or shift is not counted.<p>From s[3] = ‘B’ to s[4] = ‘c’, there is a change of key.<p>From s[4] = ‘c’ to s[5] = ‘C’, there is no change of key as caps lock or shift is not counted.<p><strong>Example 2:</strong><p><strong>Input:</strong> s = “AaAaAaaA”<p><strong>Output:</strong> 0<p><strong>Explanation:</strong> There is no change of key since only the letters ‘a’ and ‘A’ are pressed which does not require change of key.<p><strong>Constraints:</strong><ul><li><code>1 &lt;= s.length &lt;= 100</code><li><code>s</code> consists of only upper case and lower case English letters.</ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> count_key_changes</span><span style=color:#a89984>(</span><span style=color:#fe8019>mut</span><span style=color:#83a598> s</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> String</span><span style=color:#a89984>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> i32</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#83a598>        s</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>make_ascii_lowercase</span><span style=color:#a89984>();</span></span>
+<span class=giallo-l><span style=color:#83a598>        s</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>into_bytes</span><span style=color:#a89984>()</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>chunk_by</span><span style=color:#a89984>(</span><span style=color:#fb4934>|</span><span style=color:#83a598>a</span><span style=color:#a89984>,</span><span style=color:#83a598> b</span><span style=color:#fb4934>|</span><span style=color:#83a598> a</span><span style=color:#8ec07c> ==</span><span style=color:#83a598> b</span><span style=color:#a89984>)</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>count</span><span style=color:#a89984>()</span><span style=color:#fb4934> as</span><span style=color:#fabd2f> i32</span><span style=color:#8ec07c> -</span><span style=color:#d3869b> 1</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div><div class=post-tags><a class=tag href=/tags/easy>#Easy </a><a class=tag href=/tags/string>#String </a></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>

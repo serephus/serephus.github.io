@@ -1,0 +1,36 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 1221 - Split a String in Balanced Strings</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><script type=application/ld+json>
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "1221 - Split a String in Balanced Strings",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Serephus"
+    },
+    
+    
+    "datePublished": "2026-07-16T11:24:41",
+    
+    "description": "",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Serephus"
+    }
+}
+</script><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><time datetime=2026-07-16T11:24:41>Published on: <span class=accent-data>2026-07-16</span> </time><h1>1221 - Split a String in Balanced Strings</h1></header><div class=post-content><h3 id=description-leetcode>Description (<a rel="noopener external" href=https://leetcode.com/problems/split-a-string-in-balanced-strings/ target=_blank>leetcode</a>)</h3><p><strong>Balanced</strong> strings are those that have an equal quantity of <code>'L'</code> and <code>'R'</code> characters.<p>Given a <strong>balanced</strong> string <code>s</code>, split it into some number of substrings such that:<ul><li>Each substring is balanced.</ul><p>Return <em>the <strong>maximum</strong> number of balanced strings you can obtain.</em><p><strong>Example 1:</strong><p><strong>Input:</strong> s = “RLRRLLRLRL”<p><strong>Output:</strong> 4<p><strong>Explanation:</strong> s can be split into “RL”, “RRLL”, “RL”, “RL”, each substring contains same number of ‘L’ and ‘R’.<p><strong>Example 2:</strong><p><strong>Input:</strong> s = “RLRRRLLRLL”<p><strong>Output:</strong> 2<p><strong>Explanation:</strong> s can be split into “RL”, “RRRLLRLL”, each substring contains same number of ‘L’ and ‘R’.<p>Note that s cannot be split into “RL”, “RR”, “RL”, “LR”, “LL”, because the 2^nd and 5^th substrings are not balanced.<p><strong>Example 3:</strong><p><strong>Input:</strong> s = “LLLLRRRR”<p><strong>Output:</strong> 1<p><strong>Explanation:</strong> s can be split into “LLLLRRRR”.<p><strong>Constraints:</strong><ul><li><code>2 &lt;= s.length &lt;= 1000</code><li><code>s[i]</code> is either <code>'L'</code> or <code>'R'</code>.<li><code>s</code> is a <strong>balanced</strong> string.</ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#928374;font-style:italic>// one line with scan and filter and count</span></span>
+<span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> balanced_string_split</span><span style=color:#a89984>(</span><span style=color:#83a598>s</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> String</span><span style=color:#a89984>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> i32</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#83a598>        s</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>chars</span><span style=color:#a89984>()</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>scan</span><span style=color:#a89984>(</span><span style=color:#d3869b>0</span><span style=color:#a89984>,</span><span style=color:#fb4934> |</span><span style=color:#83a598>cnt</span><span style=color:#a89984>,</span><span style=color:#83a598> ch</span><span style=color:#fb4934>|</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>            match</span><span style=color:#83a598> ch</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#a89984>                '</span><span style=color:#b8bb26>L</span><span style=color:#a89984>'</span><span style=color:#8ec07c> => *</span><span style=color:#83a598>cnt</span><span style=color:#8ec07c> -=</span><span style=color:#d3869b> 1</span><span style=color:#a89984>,</span></span>
+<span class=giallo-l><span style=color:#a89984>                '</span><span style=color:#b8bb26>R</span><span style=color:#a89984>'</span><span style=color:#8ec07c> => *</span><span style=color:#83a598>cnt</span><span style=color:#8ec07c> +=</span><span style=color:#d3869b> 1</span><span style=color:#a89984>,</span></span>
+<span class=giallo-l><span style=color:#83a598>                _</span><span style=color:#8ec07c> =></span><span style=color:#fabd2f> unreachable!</span><span style=color:#a89984>(),</span></span>
+<span class=giallo-l><span style=color:#a89984>            }</span></span>
+<span class=giallo-l><span style=color:#fabd2f>            Some</span><span style=color:#a89984>(</span><span style=color:#8ec07c>*</span><span style=color:#83a598>cnt</span><span style=color:#a89984>)</span></span>
+<span class=giallo-l><span style=color:#a89984>        })</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>        // balance split have count 0</span></span>
+<span class=giallo-l><span style=color:#8ec07c>        .</span><span style=color:#fabd2f>filter</span><span style=color:#a89984>(</span><span style=color:#fb4934>|</span><span style=color:#8ec07c>&</span><span style=color:#83a598>cnt</span><span style=color:#fb4934>|</span><span style=color:#83a598> cnt</span><span style=color:#8ec07c> ==</span><span style=color:#d3869b> 0</span><span style=color:#a89984>)</span></span>
+<span class=giallo-l><span style=color:#8ec07c>        .</span><span style=color:#fabd2f>count</span><span style=color:#a89984>()</span><span style=color:#fb4934> as</span><span style=color:#83a598> _</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div><div class=post-tags><a class=tag href=/tags/easy>#Easy </a><a class=tag href=/tags/string>#String </a><a class=tag href=/tags/greedy>#Greedy </a><a class=tag href=/tags/counting>#Counting </a></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>

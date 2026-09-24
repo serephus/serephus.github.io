@@ -1,0 +1,35 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="index, follow" name=robots><link href=https://sereph.us/rss.xml rel=alternate title=RSS type=application/rss+xml><title>Serephus | 2315 - Count Asterisks</title><link as=style href=https://sereph.us/css/style.css rel=preload><link href=https://sereph.us/css/reset-min.css rel=stylesheet><link href=https://sereph.us/css/suCSS-min.css rel=stylesheet><link href=https://sereph.us/css/style.css rel=stylesheet><link href=https://sereph.us/css/custom.css rel=stylesheet><link href=https://sereph.us/favicon.ico rel=icon><script type=application/ld+json>
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "2315 - Count Asterisks",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Serephus"
+    },
+    
+    
+    "datePublished": "2026-07-28T13:32:00",
+    
+    "description": "",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Serephus"
+    }
+}
+</script><body><nav id=nav-bar><a href=/> /home/ </a><a href=/post> /post/ </a><a href=/leetcode> /leetcode/ </a><a href=/about> /about/ </a></nav><main><article class=post><header class=post-header><time datetime=2026-07-28T13:32:00>Published on: <span class=accent-data>2026-07-28</span> </time><h1>2315 - Count Asterisks</h1></header><div class=post-content><h3 id=description-leetcode>Description (<a rel="noopener external" href=https://leetcode.com/problems/count-asterisks/ target=_blank>leetcode</a>)</h3><p>You are given a string <code>s</code>, where every <strong>two</strong> consecutive vertical bars <code>'|'</code> are grouped into a <strong>pair</strong>. In other words, the 1^st and 2^nd <code>'|'</code> make a pair, the 3^rd and 4^th <code>'|'</code> make a pair, and so forth.<p>Return <em>the number of</em> <code>'*'</code> <em>in</em> <code>s</code><em>, <strong>excluding</strong> the</em> <code>'*'</code> <em>between each pair of</em> <code>'|'</code>.<p><strong>Note</strong> that each <code>'|'</code> will belong to <strong>exactly</strong> one pair.<p><strong>Example 1:</strong><p><strong>Input:</strong> s = “l|*e*et|c**o|*de|”<p><strong>Output:</strong> 2<p><strong>Explanation:</strong> The considered characters are underlined: “l|*e*et|c**o|*de|”.<p>The characters between the first and second ‘|’ are excluded from the answer.<p>Also, the characters between the third and fourth ‘|’ are excluded from the answer.<p>There are 2 asterisks considered. Therefore, we return 2.<p><strong>Example 2:</strong><p><strong>Input:</strong> s = “iamprogrammer”<p><strong>Output:</strong> 0<p><strong>Explanation:</strong> In this example, there are no asterisks in s. Therefore, we return 0.<p><strong>Example 3:</strong><p><strong>Input:</strong> s = “yo|uar|e**|b|e***au|tifu|l”<p><strong>Output:</strong> 5<p><strong>Explanation:</strong> The considered characters are underlined: “yo|uar|e**|b|e***au|tifu|l”. There are 5 asterisks considered. Therefore, we return 5.<p><strong>Constraints:</strong><ul><li><code>1 &lt;= s.length &lt;= 1000</code><li><code>s</code> consists of lowercase English letters, vertical bars <code>'|'</code>, and asterisks <code>'*'</code>.<li><code>s</code> contains an <strong>even</strong> number of vertical bars <code>'|'</code>.</ul><hr><h3 id=submission>submission</h3><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=rust><span class=giallo-l><span style=color:#928374;font-style:italic>// we could solve this with a simple loop</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// however fold is more fun</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// another fun intuition is to split by '|',</span></span>
+<span class=giallo-l><span style=color:#928374;font-style:italic>// filter by index, flat_map and count '*'</span></span>
+<span class=giallo-l><span style=color:#fb4934>impl</span><span style=color:#fabd2f> Solution</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#fb4934>    pub fn</span><span style=color:#fabd2f> count_asterisks</span><span style=color:#a89984>(</span><span style=color:#83a598>s</span><span style=color:#8ec07c>:</span><span style=color:#fabd2f> String</span><span style=color:#a89984>)</span><span style=color:#8ec07c> -></span><span style=color:#fabd2f> i32</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#83a598>        s</span><span style=color:#8ec07c>.</span><span style=color:#fabd2f>chars</span><span style=color:#a89984>()</span></span>
+<span class=giallo-l><span style=color:#8ec07c>            .</span><span style=color:#fabd2f>fold</span><span style=color:#a89984>((</span><span style=color:#d3869b>false</span><span style=color:#a89984>,</span><span style=color:#d3869b> 0</span><span style=color:#a89984>),</span><span style=color:#fb4934> |</span><span style=color:#a89984>(</span><span style=color:#83a598>ignore</span><span style=color:#a89984>,</span><span style=color:#83a598> sum</span><span style=color:#a89984>),</span><span style=color:#83a598> ch</span><span style=color:#fb4934>| match</span><span style=color:#83a598> ch</span><span style=color:#a89984> {</span></span>
+<span class=giallo-l><span style=color:#a89984>                '</span><span style=color:#b8bb26>*</span><span style=color:#a89984>'</span><span style=color:#fb4934> if !</span><span style=color:#83a598>ignore</span><span style=color:#8ec07c> =></span><span style=color:#a89984> (</span><span style=color:#83a598>ignore</span><span style=color:#a89984>,</span><span style=color:#83a598> sum</span><span style=color:#8ec07c> +</span><span style=color:#d3869b> 1</span><span style=color:#a89984>),</span></span>
+<span class=giallo-l><span style=color:#a89984>                '</span><span style=color:#b8bb26>|</span><span style=color:#a89984>'</span><span style=color:#8ec07c> =></span><span style=color:#a89984> (</span><span style=color:#fb4934>!</span><span style=color:#83a598>ignore</span><span style=color:#a89984>,</span><span style=color:#83a598> sum</span><span style=color:#a89984>),</span></span>
+<span class=giallo-l><span style=color:#83a598>                _</span><span style=color:#8ec07c> =></span><span style=color:#a89984> (</span><span style=color:#83a598>ignore</span><span style=color:#a89984>,</span><span style=color:#83a598> sum</span><span style=color:#a89984>),</span></span>
+<span class=giallo-l><span style=color:#a89984>            })</span></span>
+<span class=giallo-l><span style=color:#8ec07c>            .</span><span style=color:#d3869b>1</span></span>
+<span class=giallo-l><span style=color:#a89984>    }</span></span>
+<span class=giallo-l><span style=color:#a89984>}</span></span></code></pre></div><div class=post-tags><a class=tag href=/tags/easy>#Easy </a><a class=tag href=/tags/string>#String </a></div></article></main><footer><hr><div id=footer-container><p>Made using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> Zola theme</div></footer>
