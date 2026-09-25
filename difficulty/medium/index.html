@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Medium</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/">post</a> <a href="/leetcode/">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><h1>Medium</h1></header><main id="typost-content"><ul class="content-list"><li class="title-list"><a href="/leetcode/add-two-numbers/index.html" class="content-link">0002 - Add Two Numbers</a></li><li class="title-list"><a href="/leetcode/container-with-most-water/index.html" class="content-link">0011 - Container With Most Water</a></li><li class="title-list"><a href="/leetcode/generate-parentheses/index.html" class="content-link">0022 - Generate Parentheses</a></li><li class="title-list"><a href="/leetcode/jump-game-ii/index.html" class="content-link">0045 - Jump Game II</a></li><li class="title-list"><a href="/leetcode/rotate-image/index.html" class="content-link">0048 - Rotate Image</a></li><li class="title-list"><a href="/leetcode/maximum-subarray/index.html" class="content-link">0053 - Maximum Subarray</a></li><li class="title-list"><a href="/leetcode/jump-game/index.html" class="content-link">0055 - Jump Game</a></li><li class="title-list"><a href="/leetcode/merge-intervals/index.html" class="content-link">0056 - Merge Intervals</a></li><li class="title-list"><a href="/leetcode/edit-distance/index.html" class="content-link">0072 - Edit Distance</a></li><li class="title-list"><a href="/leetcode/unique-binary-search-trees/index.html" class="content-link">0096 - Unique Binary Search Trees</a></li><li class="title-list"><a href="/leetcode/binary-tree-level-order-traversal/index.html" class="content-link">0102 - Binary Tree Level Order Traversal</a></li><li class="title-list"><a href="/leetcode/binary-tree-zigzag-level-order-traversal/index.html" class="content-link">0103 - Binary Tree Zigzag Level Order Traversal</a></li><li class="title-list"><a href="/leetcode/best-time-to-buy-and-sell-stock-ii/index.html" class="content-link">0122 - Best Time to Buy and Sell Stock II</a></li><li class="title-list"><a href="/leetcode/single-number-ii/index.html" class="content-link">0137 - Single Number II</a></li><li class="title-list"><a href="/leetcode/single-number-iii/index.html" class="content-link">0260 - Single Number III</a></li><li class="title-list"><a href="/leetcode/best-time-to-buy-and-sell-stock-with-cooldown/index.html" class="content-link">0309 - Best Time to Buy and Sell Stock with Cooldown</a></li><li class="title-list"><a href="/leetcode/rotate-function/index.html" class="content-link">0396 - Rotate Function</a></li><li class="title-list"><a href="/leetcode/remove-k-digits/index.html" class="content-link">0402 - Remove K Digits</a></li><li class="title-list"><a href="/leetcode/queue-reconstruction-by-height/index.html" class="content-link">0406 - Queue Reconstruction by Height</a></li><li class="title-list"><a href="/leetcode/k-diff-pairs-in-an-array/index.html" class="content-link">0532 - K-diff Pairs in an Array</a></li><li class="title-list"><a href="/leetcode/delete-and-earn/index.html" class="content-link">0740 - Delete and Earn</a></li><li class="title-list"><a href="/leetcode/partition-labels/index.html" class="content-link">0763 - Partition Labels</a></li><li class="title-list"><a href="/leetcode/stone-game/index.html" class="content-link">0877 - Stone Game</a></li><li class="title-list"><a href="/leetcode/sum-of-subarray-minimums/index.html" class="content-link">0907 - Sum of Subarray Minimums</a></li><li class="title-list"><a href="/leetcode/prison-cells-after-n-days/index.html" class="content-link">0957 - Prison Cells After N Days</a></li><li class="title-list"><a href="/leetcode/smallest-integer-divisible-by-k/index.html" class="content-link">1015 - Smallest Integer Divisible by K</a></li><li class="title-list"><a href="/leetcode/shortest-path-in-binary-matrix/index.html" class="content-link">1091 - Shortest Path in Binary Matrix</a></li><li class="title-list"><a href="/leetcode/greatest-sum-divisible-by-three/index.html" class="content-link">1262 - Greatest Sum Divisible by Three</a></li><li class="title-list"><a href="/leetcode/avoid-flood-in-the-city/index.html" class="content-link">1488 - Avoid Flood in The City</a></li><li class="title-list"><a href="/leetcode/number-of-substrings-with-only-1s/index.html" class="content-link">1513 - Number of Substrings With Only 1s</a></li><li class="title-list"><a href="/leetcode/minimum-time-to-make-rope-colorful/index.html" class="content-link">1578 - Minimum Time to Make Rope Colorful</a></li><li class="title-list"><a href="/leetcode/partitioning-into-minimum-number-of-deci-binary-numbers/index.html" class="content-link">1689 - Partitioning Into Minimum Number Of Deci-Binary Numbers</a></li><li class="title-list"><a href="/leetcode/count-number-of-homogenous-substrings/index.html" class="content-link">1759 - Count Number of Homogenous Substrings</a></li><li class="title-list"><a href="/leetcode/minimum-number-of-operations-to-move-all-balls-to-each-box/index.html" class="content-link">1769 - Minimum Number of Operations to Move All Balls to Each Box</a></li><li class="title-list"><a href="/leetcode/maximum-number-of-removable-characters/index.html" class="content-link">1898 - Maximum Number of Removable Characters</a></li><li class="title-list"><a href="/leetcode/number-of-laser-beams-in-a-bank/index.html" class="content-link">2125 - Number of Laser Beams in a Bank</a></li><li class="title-list"><a href="/leetcode/largest-combination-with-bitwise-and-greater-than-zero/index.html" class="content-link">2275 - Largest Combination With Bitwise AND Greater Than Zero</a></li><li class="title-list"><a href="/leetcode/successful-pairs-of-spells-and-potions/index.html" class="content-link">2300 - Successful Pairs of Spells and Potions</a></li><li class="title-list"><a href="/leetcode/time-needed-to-rearrange-a-binary-string/index.html" class="content-link">2380 - Time Needed to Rearrange a Binary String</a></li><li class="title-list"><a href="/leetcode/maximum-number-of-integers-to-choose-from-a-range-i/index.html" class="content-link">2554 - Maximum Number of Integers to Choose From a Range I</a></li><li class="title-list"><a href="/leetcode/minimum-time-to-repair-cars/index.html" class="content-link">2594 - Minimum Time to Repair Cars</a></li><li class="title-list"><a href="/leetcode/mice-and-cheese/index.html" class="content-link">2611 - Mice and Cheese</a></li><li class="title-list"><a href="/leetcode/find-the-prefix-common-array-of-two-arrays/index.html" class="content-link">2657 - Find the Prefix Common Array of Two Arrays</a></li><li class="title-list"><a href="/leetcode/sorting-three-groups/index.html" class="content-link">2826 - Sorting Three Groups</a></li><li class="title-list"><a href="/leetcode/count-alternating-subarrays/index.html" class="content-link">3101 - Count Alternating Subarrays</a></li><li class="title-list"><a href="/leetcode/taking-maximum-energy-from-the-mystic-dungeon/index.html" class="content-link">3147 - Taking Maximum Energy From the Mystic Dungeon</a></li><li class="title-list"><a href="/leetcode/delete-nodes-from-linked-list-present-in-array/index.html" class="content-link">3217 - Delete Nodes From Linked List Present in Array</a></li><li class="title-list"><a href="/leetcode/climbing-stairs-ii/index.html" class="content-link">3693 - Climbing Stairs II</a></li><li class="title-list"><a href="/leetcode/maximize-points-after-choosing-k-tasks/index.html" class="content-link">3767 - Maximize Points After Choosing K Tasks</a></li></ul></main></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>
