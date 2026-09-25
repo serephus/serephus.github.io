@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>0957 - Prison Cells After N Days</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/">post</a> <a href="/leetcode/" class="active">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2026-07-14">Published on: <span class="accent-data">2026-07-14</span></time><h1>0957 - Prison Cells After N Days</h1></header><main id="typost-content"><h4>Description (<a href="https://leetcode.com/problems/prison-cells-after-n-days/">leetcode</a>)</h4><p>There are <code>8</code> prison cells in a row and each cell is either occupied or vacant.</p><p>Each day, whether the cell is occupied or vacant changes according to the following rules:</p><ul><li>If a cell has two adjacent neighbors that are both occupied or both vacant, then the cell becomes occupied.</li><li>Otherwise, it becomes vacant.</li></ul><p><strong>Note</strong> that because the prison is a row, the first and the last cells in the row can’t have two adjacent neighbors.</p><p>You are given an integer array <code>cells</code> where <code>cells[i] == 1</code> if the <code>ith</code> cell is occupied and <code>cells[i] == 0</code> if the <code>ith</code> cell is vacant, and you are given an integer <code>n</code>.</p><p>Return the state of the prison after <code>n</code> days (i.e., <code>n</code> such changes described above).</p><p><strong>Example 1:</strong></p><p><strong>Input:</strong> cells = [0,1,0,1,1,0,0,1], n = 7</p><p><strong>Output:</strong> [0,0,1,1,0,0,0,0]</p><p><strong>Explanation:</strong> The following table summarizes the state of the prison on each day:</p><p>Day 0: [0, 1, 0, 1, 1, 0, 0, 1]</p><p>Day 1: [0, 1, 1, 0, 0, 0, 0, 0]</p><p>Day 2: [0, 0, 0, 0, 1, 1, 1, 0]</p><p>Day 3: [0, 1, 1, 0, 0, 1, 0, 0]</p><p>Day 4: [0, 0, 0, 0, 0, 1, 0, 0]</p><p>Day 5: [0, 1, 1, 1, 0, 1, 0, 0]</p><p>Day 6: [0, 0, 1, 0, 1, 1, 0, 0]</p><p>Day 7: [0, 0, 1, 1, 0, 0, 0, 0]</p><p><strong>Example 2:</strong></p><p><strong>Input:</strong> cells = [1,0,0,1,0,0,1,0], n = 1000000000</p><p><strong>Output:</strong> [0,0,1,1,1,1,1,0]</p><p><strong>Constraints:</strong></p><ul><li><code>cells.length == 8</code></li><li><code>cells[i]</code> is either <code>0</code> or <code>1</code>.</li><li><code>1 &lt;= n &lt;= 109</code></li></ul><hr><h4>submission</h4><pre><code data-lang="rust"><em><span style="color: #928374">//</span></em><em><span style="color: #928374"> successors trick</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> since the number of possible state is at most 2^6</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> there is a loop, and others brute forced the </span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> loop pattern to be of length 1, 7 or 14</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> another observation: every state must be in loop</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> hence we just simulate (n - 1) % 14 + 1 steps</span></em>
+<span style="color: #e78a4e">impl</span> Solution <span style="color: #bdae93">{</span>
+    <span style="color: #e78a4e">pub</span> <span style="color: #e78a4e">fn</span> <span style="color: #a9b665">prison_after_n_days</span><span style="color: #bdae93">(</span>cells<span style="color: #bdae93">:</span> <span style="color: #d8a657">Vec</span><span style="color: #bdae93">&lt;</span><span style="color: #e78a4e">i32</span><span style="color: #bdae93">></span>, n<span style="color: #bdae93">:</span> <span style="color: #e78a4e">i32</span><span style="color: #bdae93">)</span> <span style="color: #bdae93">-></span> <span style="color: #d8a657">Vec</span><span style="color: #bdae93">&lt;</span><span style="color: #e78a4e">i32</span><span style="color: #bdae93">></span> <span style="color: #bdae93">{</span>
+        std<span style="color: #bdae93">::</span>iter<span style="color: #bdae93">::</span>successors<span style="color: #bdae93">(</span><span style="color: #d8a657">Some</span><span style="color: #bdae93">(</span>cells<span style="color: #bdae93">)</span><span style="color: #bdae93">,</span> <span style="color: #bdae93">|</span>prev<span style="color: #bdae93">|</span> <span style="color: #d8a657">Some</span><span style="color: #bdae93">(</span>
+            <span style="color: #bdae93">(</span><span style="color: #d3869b">0</span><span style="color: #ea6962">..</span><span style="color: #d3869b">8</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">map</span><span style="color: #bdae93">(</span><span style="color: #bdae93">|</span>idx<span style="color: #bdae93">|</span> <span style="color: #ea6962">match</span> idx <span style="color: #bdae93">{</span>
+                <span style="color: #d3869b">0</span> <span style="color: #ea6962">|</span> <span style="color: #d3869b">7</span> <span style="color: #ea6962">=></span> <span style="color: #d3869b">0</span><span style="color: #bdae93">,</span>
+                idx <span style="color: #ea6962">=></span> <span style="color: #bdae93">(</span>prev<span style="color: #bdae93">[</span>idx <span style="color: #ea6962">-</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">]</span> <span style="color: #ea6962">==</span> prev<span style="color: #bdae93">[</span>idx <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">]</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span><span style="color: #bdae93">,</span>
+            <span style="color: #bdae93">}</span><span style="color: #bdae93">)</span>
+            <span style="color: #bdae93">.</span><span style="color: #89b482">collect</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span>
+        <span style="color: #bdae93">)</span><span style="color: #bdae93">)</span>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> note with successors we need +1 here</span></em>
+        <span style="color: #bdae93">.</span><span style="color: #89b482">take</span><span style="color: #bdae93">(</span><span style="color: #bdae93">(</span>n <span style="color: #ea6962">as</span> <span style="color: #e78a4e">usize</span> <span style="color: #ea6962">-</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">%</span> <span style="color: #d3869b">14</span> <span style="color: #ea6962">+</span> <span style="color: #d3869b">2</span><span style="color: #bdae93">)</span>
+        <span style="color: #bdae93">.</span><span style="color: #89b482">last</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span>
+        <span style="color: #bdae93">.</span><span style="color: #89b482">unwrap</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span>
+    <span style="color: #bdae93">}</span>
+<span style="color: #bdae93">}</span></code></pre></main><div class="post-tags"><a href="/tags/array/" class="tag">Array</a> <a href="/tags/hash-table/" class="tag">Hash Table</a> <a href="/tags/math/" class="tag">Math</a> <a href="/tags/bit-manipulation/" class="tag">Bit Manipulation</a> <a href="/tags/floyd's-cycle-finding-algorithm/" class="tag">Floyd's Cycle Finding Algorithm</a> <a href="/difficulty/medium/" class="tag">Medium</a></div></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>

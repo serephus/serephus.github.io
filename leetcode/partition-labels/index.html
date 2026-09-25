@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>0763 - Partition Labels</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/">post</a> <a href="/leetcode/" class="active">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2026-07-13">Published on: <span class="accent-data">2026-07-13</span></time><h1>0763 - Partition Labels</h1></header><main id="typost-content"><h4>Description (<a href="https://leetcode.com/problems/partition-labels/">leetcode</a>)</h4><p>You are given a string <code>s</code>. We want to partition the string into as many parts as possible so that each letter appears in at most one part. For example, the string <code>"ababcc"</code> can be partitioned into <code>["abab", "cc"]</code>, but partitions such as <code>["aba", "bcc"]</code> or <code>["ab", "ab", "cc"]</code> are invalid.</p><p>Note that the partition is done so that after concatenating all the parts in order, the resultant string should be <code>s</code>.</p><p>Return <em>a list of integers representing the size of these parts</em>.</p><p><strong>Example 1:</strong></p><p><strong>Input:</strong> s = “ababcbacadefegdehijhklij”</p><p><strong>Output:</strong> [9,7,8]</p><p><strong>Explanation:</strong></p><p>The partition is “ababcbaca”, “defegde”, “hijhklij”.</p><p>This is a partition so that each letter appears in at most one part.</p><p>A partition like “ababcbacadefegde”, “hijhklij” is incorrect, because it splits s into less parts.</p><p><strong>Example 2:</strong></p><p><strong>Input:</strong> s = “eccbbbbdec”</p><p><strong>Output:</strong> [10]</p><p><strong>Constraints:</strong></p><ul><li><code>1 &lt;= s.length &lt;= 500</code></li><li><code>s</code> consists of lowercase English letters.</li></ul><hr><h4>submission</h4><pre><code data-lang="rust"><em><span style="color: #928374">//</span></em><em><span style="color: #928374"> we solve this by marking last occurrence of each char</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> we just merge intervals on the way</span></em>
+<span style="color: #e78a4e">impl</span> Solution <span style="color: #bdae93">{</span>
+    <span style="color: #e78a4e">pub</span> <span style="color: #e78a4e">fn</span> <span style="color: #a9b665">partition_labels</span><span style="color: #bdae93">(</span>s<span style="color: #bdae93">:</span> String<span style="color: #bdae93">)</span> <span style="color: #bdae93">-></span> <span style="color: #d8a657">Vec</span><span style="color: #bdae93">&lt;</span><span style="color: #e78a4e">i32</span><span style="color: #bdae93">></span> <span style="color: #bdae93">{</span>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> this should be right I think?</span></em>
+        <span style="color: #e78a4e">let</span> last<span style="color: #bdae93">:</span> std<span style="color: #bdae93">::</span>collections<span style="color: #bdae93">::</span>HashMap<span style="color: #bdae93">&lt;</span><span style="color: #e78a4e">char</span>, <span style="color: #e78a4e">usize</span><span style="color: #bdae93">></span> <span style="color: #ea6962">=</span>
+            s<span style="color: #bdae93">.</span><span style="color: #89b482">chars</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">enumerate</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">map</span><span style="color: #bdae93">(</span><span style="color: #bdae93">|</span><span style="color: #bdae93">(</span>idx<span style="color: #bdae93">,</span> ch<span style="color: #bdae93">)</span><span style="color: #bdae93">|</span> <span style="color: #bdae93">(</span>ch<span style="color: #bdae93">,</span> idx<span style="color: #bdae93">)</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">collect</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">;</span>
+        <span style="color: #e78a4e">let</span> <span style="color: #bdae93">(</span><span style="color: #e78a4e">mut</span> start<span style="color: #bdae93">,</span> <span style="color: #e78a4e">mut</span> end<span style="color: #bdae93">)</span> <span style="color: #ea6962">=</span> <span style="color: #bdae93">(</span><span style="color: #d3869b">0</span><span style="color: #bdae93">,</span> <span style="color: #d3869b">0</span><span style="color: #bdae93">)</span><span style="color: #bdae93">;</span>
+        <span style="color: #e78a4e">let</span> <span style="color: #e78a4e">mut</span> parts <span style="color: #ea6962">=</span> vec!<span style="color: #bdae93">[</span><span style="color: #bdae93">]</span><span style="color: #bdae93">;</span>
+        <span style="color: #ea6962">for</span> <span style="color: #bdae93">(</span>idx<span style="color: #bdae93">,</span> ch<span style="color: #bdae93">)</span> <span style="color: #ea6962">in</span> s<span style="color: #bdae93">.</span><span style="color: #89b482">chars</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">enumerate</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span> <span style="color: #bdae93">{</span>
+            <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> update the end index</span></em>
+            end <span style="color: #ea6962">=</span> end<span style="color: #bdae93">.</span><span style="color: #89b482">max</span><span style="color: #bdae93">(</span><span style="color: #ea6962">*</span>last<span style="color: #bdae93">.</span><span style="color: #89b482">get</span><span style="color: #bdae93">(</span><span style="color: #ea6962">&amp;</span>ch<span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">unwrap_or</span><span style="color: #bdae93">(</span><span style="color: #ea6962">&amp;</span><span style="color: #d3869b">0</span><span style="color: #bdae93">)</span><span style="color: #bdae93">)</span><span style="color: #bdae93">;</span>
+            <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> we've reached the end</span></em>
+            <span style="color: #ea6962">if</span> idx <span style="color: #ea6962">==</span> end <span style="color: #bdae93">{</span>
+                parts<span style="color: #bdae93">.</span><span style="color: #89b482">push</span><span style="color: #bdae93">(</span><span style="color: #bdae93">(</span>end <span style="color: #ea6962">-</span> start <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span><span style="color: #bdae93">)</span><span style="color: #bdae93">;</span>
+                start <span style="color: #ea6962">=</span> idx <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">;</span>
+            <span style="color: #bdae93">}</span>
+        <span style="color: #bdae93">}</span>
+        parts
+    <span style="color: #bdae93">}</span>
+<span style="color: #bdae93">}</span></code></pre></main><div class="post-tags"><a href="/tags/hash-table/" class="tag">Hash Table</a> <a href="/tags/two-pointers/" class="tag">Two Pointers</a> <a href="/tags/string/" class="tag">String</a> <a href="/tags/greedy/" class="tag">Greedy</a> <a href="/difficulty/medium/" class="tag">Medium</a></div></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>1716 - Calculate Money in Leetcode Bank</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/">post</a> <a href="/leetcode/" class="active">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2026-07-25">Published on: <span class="accent-data">2026-07-25</span></time><h1>1716 - Calculate Money in Leetcode Bank</h1></header><main id="typost-content"><h4>Description (<a href="https://leetcode.com/problems/calculate-money-in-leetcode-bank/">leetcode</a>)</h4><p>Hercy wants to save money for his first car. He puts money in the Leetcode bank <strong>every day</strong>.</p><p>He starts by putting in <code>$1</code> on Monday, the first day. Every day from Tuesday to Sunday, he will put in <code>$1</code> more than the day before. On every subsequent Monday, he will put in <code>$1</code> more than the <strong>previous Monday</strong>.</p><p>Given <code>n</code>, return <em>the total amount of money he will have in the Leetcode bank at the end of the</em><code>nth</code><em>day.</em></p><p><strong>Example 1:</strong></p><p><strong>Input:</strong> n = 4</p><p><strong>Output:</strong> 10</p><p><strong>Explanation:</strong> After the 4^th day, the total is 1 + 2 + 3 + 4 = 10.</p><p><strong>Example 2:</strong></p><p><strong>Input:</strong> n = 10</p><p><strong>Output:</strong> 37</p><p><strong>Explanation:</strong> After the 10^th day, the total is (1 + 2 + 3 + 4 + 5 + 6 + 7) + (2 + 3 + 4) = 37. Notice that on the 2^nd Monday, Hercy only puts in $2.</p><p><strong>Example 3:</strong></p><p><strong>Input:</strong> n = 20</p><p><strong>Output:</strong> 96</p><p><strong>Explanation:</strong> After the 20^th day, the total is (1 + 2 + 3 + 4 + 5 + 6 + 7) + (2 + 3 + 4 + 5 + 6 + 7 + 8) + (3 + 4 + 5 + 6 + 7 + 8) = 96.</p><p><strong>Constraints:</strong></p><ul><li><code>1 &lt;= n &lt;= 1000</code></li></ul><hr><h4>submission</h4><pre><code data-lang="rust"><em><span style="color: #928374">//</span></em><em><span style="color: #928374"> the total money saved each week is an</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> arithmetic sequence, the money saved each</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> day within a week is also an arithmetic</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> sequence, hence we have the following</span></em>
+<em><span style="color: #928374">//</span></em><em><span style="color: #928374"> formula.</span></em>
+<span style="color: #e78a4e">impl</span> Solution <span style="color: #bdae93">{</span>
+    <span style="color: #e78a4e">pub</span> <span style="color: #e78a4e">fn</span> <span style="color: #a9b665">total_money</span><span style="color: #bdae93">(</span>n<span style="color: #bdae93">:</span> <span style="color: #e78a4e">i32</span><span style="color: #bdae93">)</span> <span style="color: #bdae93">-></span> <span style="color: #e78a4e">i32</span> <span style="color: #bdae93">{</span>
+        <span style="color: #e78a4e">let</span> <span style="color: #bdae93">(</span>w<span style="color: #bdae93">,</span> r<span style="color: #bdae93">)</span> <span style="color: #ea6962">=</span> <span style="color: #bdae93">(</span>n <span style="color: #ea6962">/</span> <span style="color: #d3869b">7</span><span style="color: #bdae93">,</span> n <span style="color: #ea6962">%</span> <span style="color: #d3869b">7</span><span style="color: #bdae93">)</span><span style="color: #bdae93">;</span>
+        w <span style="color: #ea6962">*</span> <span style="color: #d3869b">21</span> <span style="color: #ea6962">+</span> w <span style="color: #ea6962">*</span> <span style="color: #bdae93">(</span>w <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">*</span> <span style="color: #d3869b">7</span> <span style="color: #ea6962">/</span> <span style="color: #d3869b">2</span> <span style="color: #ea6962">+</span> <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> total weeks</span></em>
+            w <span style="color: #ea6962">*</span> r <span style="color: #ea6962">+</span> r <span style="color: #ea6962">*</span> <span style="color: #bdae93">(</span>r <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">/</span> <span style="color: #d3869b">2</span> <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> rest days</span></em>
+    <span style="color: #bdae93">}</span>
+<span style="color: #bdae93">}</span></code></pre></main><div class="post-tags"><a href="/tags/math/" class="tag">Math</a> <a href="/difficulty/easy/" class="tag">Easy</a></div></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>

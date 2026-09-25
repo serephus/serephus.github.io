@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>0041 - First Missing Positive</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/">post</a> <a href="/leetcode/" class="active">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2026-08-03">Published on: <span class="accent-data">2026-08-03</span></time><h1>0041 - First Missing Positive</h1></header><main id="typost-content"><h4>Description (<a href="https://leetcode.com/problems/first-missing-positive/">leetcode</a>)</h4><p>Given an unsorted integer array <code>nums</code>. Return the <em>smallest positive integer</em> that is <em>not present</em> in <code>nums</code>.</p><p>You must implement an algorithm that runs in <code>O(n)</code> time and uses <code>O(1)</code> auxiliary space.</p><p><strong>Example 1:</strong></p><p><strong>Input:</strong> nums = [1,2,0]</p><p><strong>Output:</strong> 3</p><p><strong>Explanation:</strong> The numbers in the range [1,2] are all in the array.</p><p><strong>Example 2:</strong></p><p><strong>Input:</strong> nums = [3,4,-1,1]</p><p><strong>Output:</strong> 2</p><p><strong>Explanation:</strong> 1 is in the array but 2 is missing.</p><p><strong>Example 3:</strong></p><p><strong>Input:</strong> nums = [7,8,9,11,12]</p><p><strong>Output:</strong> 1</p><p><strong>Explanation:</strong> The smallest positive integer 1 is missing.</p><p><strong>Constraints:</strong></p><ul><li><code>1 &lt;= nums.length &lt;= 105</code></li><li><code>-231 &lt;= nums[i] &lt;= 231 - 1</code></li></ul><hr><h4>submission</h4><pre><code data-lang="rust"><span style="color: #e78a4e">impl</span> Solution <span style="color: #bdae93">{</span>
+    <span style="color: #e78a4e">pub</span> <span style="color: #e78a4e">fn</span> <span style="color: #a9b665">first_missing_positive</span><span style="color: #bdae93">(</span><span style="color: #e78a4e">mut</span> nums<span style="color: #bdae93">:</span> <span style="color: #d8a657">Vec</span><span style="color: #bdae93">&lt;</span><span style="color: #e78a4e">i32</span><span style="color: #bdae93">></span><span style="color: #bdae93">)</span> <span style="color: #bdae93">-></span> <span style="color: #e78a4e">i32</span> <span style="color: #bdae93">{</span>
+        <span style="color: #ea6962">for</span> i <span style="color: #ea6962">in</span> <span style="color: #d3869b">0</span><span style="color: #ea6962">..</span>nums<span style="color: #bdae93">.</span><span style="color: #89b482">len</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span> <span style="color: #bdae93">{</span>
+            <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> cyclic sort</span></em>
+            <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> rotate nums[i] until it out of range or precisely i + 1</span></em>
+            <span style="color: #ea6962">while</span> <span style="color: #d3869b">0</span> <span style="color: #ea6962">&lt;</span> nums<span style="color: #bdae93">[</span>i<span style="color: #bdae93">]</span> <span style="color: #ea6962">&amp;&amp;</span> nums<span style="color: #bdae93">[</span>i<span style="color: #bdae93">]</span> <span style="color: #ea6962">&lt;=</span> nums<span style="color: #bdae93">.</span><span style="color: #89b482">len</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span>
+                    <span style="color: #ea6962">&amp;&amp;</span> nums<span style="color: #bdae93">[</span>i<span style="color: #bdae93">]</span> <span style="color: #ea6962">!=</span> nums<span style="color: #bdae93">[</span>nums<span style="color: #bdae93">[</span>i<span style="color: #bdae93">]</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">usize</span> <span style="color: #ea6962">-</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">]</span> <span style="color: #bdae93">{</span>
+                <span style="color: #e78a4e">let</span> target <span style="color: #ea6962">=</span> nums<span style="color: #bdae93">[</span>i<span style="color: #bdae93">]</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">usize</span> <span style="color: #ea6962">-</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">;</span>
+                nums<span style="color: #bdae93">.</span><span style="color: #89b482">swap</span><span style="color: #bdae93">(</span>i<span style="color: #bdae93">,</span> target<span style="color: #bdae93">)</span><span style="color: #bdae93">;</span>
+            <span style="color: #bdae93">}</span>
+        <span style="color: #bdae93">}</span>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> iterate through rotated array to find the first missing positive</span></em>
+        nums<span style="color: #bdae93">.</span><span style="color: #89b482">iter</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span>
+            <span style="color: #bdae93">.</span><span style="color: #89b482">enumerate</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span>
+            <span style="color: #bdae93">.</span><span style="color: #89b482">position</span><span style="color: #bdae93">(</span><span style="color: #bdae93">|</span><span style="color: #bdae93">(</span>idx<span style="color: #bdae93">,</span> &amp;val<span style="color: #bdae93">)</span><span style="color: #bdae93">|</span> idx <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span> <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span> <span style="color: #ea6962">!=</span> val<span style="color: #bdae93">)</span>
+            <span style="color: #bdae93">.</span><span style="color: #89b482">unwrap_or</span><span style="color: #bdae93">(</span>nums<span style="color: #bdae93">.</span><span style="color: #89b482">len</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span> <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span>
+    <span style="color: #bdae93">}</span>
+<span style="color: #bdae93">}</span></code></pre></main><div class="post-tags"><a href="/tags/array/" class="tag">Array</a> <a href="/tags/hash-table/" class="tag">Hash Table</a> <a href="/difficulty/hard/" class="tag">Hard</a></div></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>
