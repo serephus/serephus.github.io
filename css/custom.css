@@ -1,1 +1,17 @@
 /* Project-specific overrides. The theme lives in theme.css. */
+
+/* Wider content column. The theme's default measure (46rem) is narrow, so code
+   lines wrap after roughly 75 characters. 58rem leaves room for about 100
+   monospace characters (code renders at 0.88em in a ~0.6ch-wide face) while
+   keeping prose lines comfortably readable. */
+:root {
+  --measure: 58rem;
+}
+
+/* Soft-wrap code blocks: long lines (comments, long signatures, ...) wrap
+   instead of producing a horizontal scrollbar. */
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow-x: visible;
+}
