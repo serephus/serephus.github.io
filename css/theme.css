@@ -1,0 +1,482 @@
+/* Gruvbox Material (dark) theme. */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #1d2021;
+  --bg-soft: #282828;
+  --surface: #32302f;
+  --surface-2: #3c3836;
+  --border: #504945;
+
+  --fg: #d4be98;
+  --fg-dim: #a89984;
+  --grey: #928374;
+
+  --red: #ea6962;
+  --orange: #e78a4e;
+  --yellow: #d8a657;
+  --green: #a9b665;
+  --aqua: #89b482;
+  --blue: #7daea3;
+  --purple: #d3869b;
+
+  --link: var(--blue);
+  --accent: var(--green);
+
+  --radius: 10px;
+  --measure: 46rem;
+  --sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* A soft glow so the background isn't flat. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(48rem 32rem at 15% -10%, rgba(168, 153, 132, 0.07), transparent 60%),
+    radial-gradient(40rem 32rem at 110% 5%, rgba(125, 174, 163, 0.07), transparent 60%),
+    radial-gradient(36rem 30rem at 50% 120%, rgba(211, 134, 155, 0.05), transparent 60%);
+}
+
+::selection {
+  background: rgba(169, 182, 101, 0.28);
+}
+
+/* Navigation: sticky frosted glass. */
+#nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem;
+  background: rgba(29, 32, 33, 0.7);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(80, 73, 69, 0.5);
+}
+
+#nav-bar a {
+  color: var(--fg-dim);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+#nav-bar a:hover {
+  color: var(--fg);
+  background: rgba(60, 56, 54, 0.5);
+}
+
+#nav-bar a.active {
+  color: var(--accent);
+}
+
+/* Content column. */
+.post,
+.content-section,
+.home-hero {
+  width: min(100% - 2rem, var(--measure));
+  margin-inline: auto;
+  flex: 1 0 auto;
+}
+
+.post,
+.content-section {
+  padding: 2.5rem 0 3rem;
+}
+
+/* Home hero: avatar + bio, grouped and centred. */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem 0;
+}
+
+.home-hero main {
+  width: 100%;
+  text-align: center;
+}
+
+.home-hero blockquote {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--fg-dim);
+  font-style: italic;
+}
+
+.home-hero blockquote::before {
+  content: none;
+}
+
+.avatar {
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px var(--surface-2),
+    0 0 60px 8px rgba(169, 182, 101, 0.08),
+    0 24px 48px -24px rgba(0, 0, 0, 0.7);
+}
+
+/* Typography. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2.2rem 0 0.8rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 650;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 1.9rem;
+}
+h2 {
+  font-size: 1.55rem;
+}
+h3 {
+  font-size: 1.4rem;
+}
+h4 {
+  font-size: 1.18rem;
+}
+h5 {
+  font-size: 1.02rem;
+}
+h6 {
+  font-size: 0.9rem;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--fg);
+}
+
+ul,
+ol {
+  margin: 1rem 0;
+  padding-inline-start: 1.5rem;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+li {
+  margin: 0.3rem 0;
+}
+
+blockquote {
+  position: relative;
+  margin: 1.75rem 0;
+  padding: 1rem 1.25rem 1rem 2.75rem;
+  background: var(--surface);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--fg-dim);
+  font-style: italic;
+}
+
+blockquote::before {
+  content: "\201C";
+  position: absolute;
+  inset-inline-start: 0.8rem;
+  inset-block-start: 0.35rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+blockquote p + p {
+  margin-top: 0.5rem;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--surface-2);
+  margin: 1.5rem 0;
+}
+
+mark {
+  background: rgba(216, 166, 87, 0.3);
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 3px;
+}
+
+/* Code. */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+
+code:not(pre code) {
+  background: var(--surface-2);
+  color: var(--fg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 5px;
+}
+
+pre {
+  margin: 1.25rem 0;
+  padding: 1rem 1.15rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  line-height: 1.55;
+  box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.8);
+}
+
+pre code {
+  background: none;
+  color: inherit;
+}
+
+/* Tables. */
+table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--surface-2);
+}
+
+th {
+  color: var(--fg-dim);
+  font-weight: 600;
+}
+
+/* Images. */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+/* Post header / metadata. */
+.post-header time {
+  color: var(--grey);
+  font-size: 0.875rem;
+}
+
+.accent-data {
+  color: var(--accent);
+}
+
+.post-header h1 {
+  margin: 0.35rem 0 1.5rem;
+}
+
+/* Listings. */
+.content-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+}
+
+.title-list {
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.65rem 0.5rem;
+  margin-inline: -0.5rem;
+  border-bottom: 1px solid rgba(80, 73, 69, 0.4);
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.title-list:hover {
+  background: rgba(60, 56, 54, 0.35);
+}
+
+.content-meta {
+  color: var(--grey);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.content-link {
+  color: var(--link);
+}
+
+/* Tags. */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2.5rem 0 0;
+}
+
+.tag {
+  font-size: 0.8rem;
+  color: var(--fg-dim);
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  text-decoration: none;
+}
+
+.tag:hover {
+  color: var(--fg);
+  border-color: var(--border);
+}
+
+/* Taxonomy index + term pages. */
+.taxonomy-terms {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.taxonomy-terms li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: 999px;
+  padding: 0.15rem 0.85rem;
+}
+
+.taxonomy-terms a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.taxonomy-terms a:hover {
+  color: var(--link);
+}
+
+.taxonomy-terms .count {
+  color: var(--grey);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Footer. */
+footer {
+  width: min(100% - 2rem, var(--measure));
+  margin-inline: auto;
+  padding: 1.5rem 0 2.5rem;
+  color: var(--grey);
+  font-size: 0.85rem;
+}
+
+#footer-container {
+  text-align: center;
+}
+
+footer a {
+  color: var(--fg-dim);
+}
+
+/* Display math (Typst inline SVG). */
+.math-display {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  font-size: 1.12em;
+}
+
+/* Typst lays math out as SVG with hardcoded black; follow the theme. */
+svg [fill="#000000"] {
+  fill: currentColor;
+}
+
+svg [stroke="#000000"] {
+  stroke: currentColor;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+
+  .home-hero {
+    padding: 1rem 0;
+  }
+
+  .avatar {
+    width: 11rem;
+    height: 11rem;
+  }
+}
