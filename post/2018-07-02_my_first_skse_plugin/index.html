@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>第一个SKSE插件</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/" class="active">post</a> <a href="/leetcode/">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2018-07-02">Published on: <span class="accent-data">2018-07-02</span></time><h1>第一个SKSE插件</h1></header><main id="typost-content"><p>最近也是花了点时间研究了一下老滚，主要还是在开发方面，也花了点时间玩了一会。</p><p>老滚这游戏确实有自己独特的魅力，游戏本体本身非常开放，有非常广阔的世界、丰富的任务、多样的NPC、剧情也很多。任务虽然一直在指引你，但是你大部分时间都可以随时停止随时开始，所以不会有很多游戏大部分时间都被任务牵着走或者说线性的感觉。</p><p>老滚（或者说B社）官方支持mod，提供mod支持的同时，还提供MOD制作的工具CK，将游戏内容开放给所有玩家。但是既然开放，这样怎么会够呢，虽然mod能做出很强大的效果，但毕竟有限，就算是支持脚本编程，API也是有诸多限制的。这时候就轮到skse上场了，skse是国外的一个团队开发维护的，主要目的是拓展老滚的脚本API，例如缺失的键盘响应。skse还逆向了老滚里的不少class，当然不是完全逆向，而是识别了很多成员变量和函数的作用。另外skse提供了统一的插件接口，这使得所有程序员可以方便的为老滚编写插件，假如老滚有什么地方让你觉得不满意，你只需要定位到你要修改的代码，简单的修改或是hook它，来改变老滚的引擎的行为，最终你只需要编译成一个dll，放在指定的目录，skse会自动加载你的插件，从而使得你获得修改游戏引擎的能力，而且不会对老滚的程序本身有任何影响（不会修改老滚的可执行程序，而是运行的时候动态修改在内存里的机器指令）。这使得几乎每个老滚mod玩家都离不开skse，因为现今，许多mod直接以skse为前置，比如SkyUI这样的N网endorses排第一的基础mod，更多的mod以包含skse插件的形式间接的依赖于skse，比如几乎是老滚物理插件唯一选择的hdt物理插件，改变第一人称视角（为第一人称视角添加身体）的Enhanced Camera。</p><p>16年重置版发布之后，由于整个游戏从32位变为64位，SKSE团队不得不重新构建SKSE，这个过程花了将近一年，终于在去年9月份发布了第一个Alpha版本。此后大量的skse插件被移植到重置版。</p><p>skse为mod作者提供了许多接口，包括注册自己的papyrus函数、存档支持、Scaleform接口、消息接口等，一个skse插件需要至少实现并导出两个函数，一个用来判断版本是否合法（由于其特殊性，skse本身只支持一个版本，而mod可以支持多个版本，区别是实现会复杂一些），一个用来加载插件、hook函数、注册papyrus函数等。做一个skse插件你需要一些基础的c++知识，比较熟悉汇编语言，再通过ida分析老滚的汇编代码，找到你想要修改的代码，在加载插件时修改，编译成相应的dll，再通过skse加载好自己的插件，就完成了skse插件的制作。</p><p>由于Real Flying的作者在三年前就弃坑了自己的mod，这个mod一直没有被完整的移植到重置版，关键就是没人写出SKSE64插件支持飞行功能。通过看源代码，我了解到这个插件是通过hook一个处理Actor物理的函数（这个函数每帧会调用一次，改变Actor的位置速度等物理状态）来实现飞行的。简而言之，hook掉这个函数，通过一个全局变量fJumpHeightMin的值判断飞行状态，再根据不同的状态，在实际调用这个函数之前，修改不同方向的速度，来达到上升下降滑翔的效果，再通过FNIS播放一个Idle动画和自带骨骼和behaviour的翅膀模型，来使角色做出相应的动作。由于使用的是简单的idle动画，无法在飞行时攻击，也不支持第一人称（因为第一人称没有身体）。</p><p>整个插件实际上比较简单直接，移植并不需要修改多少东西，主要的工作还是重新确定函数地址、变量偏移量。skse64本身逆向了一些类和地址，所以其实真正需要找的已经不多了。另外就是64位程序的基地址不再是一个确定的值，涉及到地址的代码均需要简单修改。此外，之前用的hook库在64位下不再能用，还需要换一个hook库（或者手写汇编，还是别为难自己了- -），总之这些工作做完，再把程序编译成64位dll就可以了。</p><p>后来我还联系作者要了权限，感觉其实不应该要这个权限的，因为我对动画什么的一窍不通- -暂时也只能这样了，还好脚本还是可以改改的。这篇主要还是关于skse插件的，别的碰到的问题也就不多提了。</p></main></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>扫雷</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/" class="active">post</a> <a href="/leetcode/">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2015-12-12">Published on: <span class="accent-data">2015-12-12</span></time><h1>扫雷</h1></header><main id="typost-content"><h3>ACLlib</h3><p>ACLLib是浙大竺院用来帮助学生完成程序设计专题用的一个库,这个库基本就是对win32API做了一个简单的封装,去掉了一些复杂的参数,配置好了winMain函数,处理了消息循环等繁杂的过程.</p><p>整个库其实只有一个.c源文件和一个.h头文件,由浙大翁凯老师开源在github上.使用库时,学生只需要填充Setup函数就可以生成一个Windows图形程序,相对来说对于新手十分友好.于是我看到这个库的时候就研究了一下.仿照windows扫雷做了一个相对简单的扫雷. 由于ACLlib没有提供很详细的函数说明,为了方便使用我还写了一点简单的注释,放在我github的项目上<a href="https://github.com/serephus/MineSweeper">MineSweeper</a>. 之前我就做过控制台扫雷,那时候用的是简单的gotoxy跟getch等函数配合操控光标,简单输入达到交互的目的,存放雷区也是非常简单的使用了两个全局数组.当时看来效果居然还可以= =…</p><h3>扫雷</h3><p>虽然是仿制windows扫雷,但是由于ACLLib本身的问题,程序窗口无法动态调节大小.这也是非常无奈,目前实现的(跟还没实现的)特性主要有:</p><ul><li>☒ 鼠标悬停处理(鼠标所在方块动态变色)</li><li>☒ 标记,点开等基本操作</li><li>☒ 双击操作(双击翻开的雷,周围标记等于数字的情况下翻开周边的雷)</li><li>☐ 使用图片…并没有使用图片…(只是绘制了字符,当然并不难…而且使用字符玩多了感觉晕…)</li><li>☐ 声音…同样没有…</li><li>☐ 记录功能…暂时没有…</li><li>☐ 雷数显示与时间显示…居然也没有…</li><li>☐ 第一步不会踩雷…也没有做…</li><li>☐ 动画,没有…</li><li>☐ 难度选择…没有…(我默认设置20x16个格子,70个雷,我发现我的感觉比windows的99个雷更难)</li><li>☐ 细节(我发现windows扫雷还是很多细节的)…没有</li></ul><p>只能说还是很naive的,等以后有时间再完善吧…</p><p>—to be continue…</p></main></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>新的开始</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/" class="active">post</a> <a href="/leetcode/">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2018-05-24">Published on: <span class="accent-data">2018-05-24</span></time><h1>新的开始</h1></header><main id="typost-content"><p>最近也是重新考虑再写写博客，也是试了几个流行的框架，以前用的Ghost现在已经有些臃肿了，我这1核心1GB内存 1M网速的VPS怕是已经带不动了，安装了两次都失败了，我也懒得再弄了，其他有后台的博客框架也不太会弄（并不懂PHP），所以最后还是回归了Hexo这个最初使用的框架，Hexo并没有后台，只负责将你的markdown日志生成博客的html静态文件，然后发布到Github Page或者VPS或者其他平台上。</p><p>总之Hexo用起来会不如其他有后台的框架来的方便，需要自己生成再发布（当然现在其实很方便了，一键生成+发布，再搭配一个好用的markdown编辑器，用起来也是很方便的），同时Hexo并不依赖VPS，只要有静态存储空间就可以了。</p><p>今天也是花了些事件在自己电脑上安装了nodejs、hexo，选了个自己喜欢的主题，再稍稍修改了一下，支持了Mathjax。另外把自己之前在Ghost上写的几篇博客也迁移了过来，图片暂时是没了。</p><p>其实倒是没什么关系，反正也没什么要紧的东西，再者重新写博客，也不知道能不能坚持的下去。</p><p>说来FS今天发布了魂1的重置版，说实话我是稍微有点失望的，可能是因为我期望太高了吧，毕竟魂1在我心目中的地位是非常之高的。可能毕竟只是remaster不是remake吧，基本上只相当于官方出了高清材质包+60帧补丁+联机补丁+若干bug修复+附送若干bug吧。其实看得出来，很多玩家的心情都和我差不多，也由于恶心的中文加载bug和没适配高刷新率屏幕，没过多久，steam评论就已经是褒贬不一了。感觉上意义比较大的就是解锁了帧率，让游戏整体的流畅度有所提升。至于画质，感觉并没有很明显的提升。</p><p>说起来魂1我玩的也不多，它的有些缺点对我来说太影响体验了，不过好歹是梦开始的地方，真的有点想去传火啊。可惜真的怕没什么时间~</p></main></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>
