@@ -38,6 +38,7 @@
   <url><loc>https://sereph.us/leetcode/count-number-of-homogenous-substrings/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/count-operations-to-obtain-zero/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/count-partitions-with-even-sum-difference/index.html</loc></url>
+  <url><loc>https://sereph.us/leetcode/counting-words-with-a-given-prefix/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/decode-xored-array/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/delete-and-earn/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/delete-nodes-from-linked-list-present-in-array/index.html</loc></url>
@@ -107,6 +108,7 @@
   <url><loc>https://sereph.us/leetcode/remove-duplicates-from-sorted-list/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/remove-element/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/remove-k-digits/index.html</loc></url>
+  <url><loc>https://sereph.us/leetcode/repeated-substring-pattern/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/reverse-bits/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/rotate-function/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/rotate-image/index.html</loc></url>
@@ -194,6 +196,7 @@
   <url><loc>https://sereph.us/tags/hash-table/index.html</loc></url>
   <url><loc>https://sereph.us/tags/heap-(priority-queue)/index.html</loc></url>
   <url><loc>https://sereph.us/tags/index.html</loc></url>
+  <url><loc>https://sereph.us/tags/knuth–morris–pratt-algorithm/index.html</loc></url>
   <url><loc>https://sereph.us/tags/linked-list/index.html</loc></url>
   <url><loc>https://sereph.us/tags/math/index.html</loc></url>
   <url><loc>https://sereph.us/tags/matrix/index.html</loc></url>
@@ -219,5 +222,6 @@
   <url><loc>https://sereph.us/tags/tree/index.html</loc></url>
   <url><loc>https://sereph.us/tags/trie/index.html</loc></url>
   <url><loc>https://sereph.us/tags/two-pointers/index.html</loc></url>
+  <url><loc>https://sereph.us/tags/z-algorithm/index.html</loc></url>
   <url><loc>https://sereph.us/tags/zero-sum-game/index.html</loc></url>
 </urlset>

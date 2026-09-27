@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>2185 - Counting Words With a Given Prefix</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><style class="typost-spoiler-style">.typost-spoiler{color:transparent;background:var(--spoiler-bg,rgba(146,131,116,.3));border-radius:.25em;padding:0 .3em;cursor:help;transition:color .15s ease,background-color .15s ease;-webkit-user-select:none;user-select:none}.typost-spoiler:hover,.typost-spoiler:focus-visible{color:inherit;background:var(--spoiler-bg-revealed,transparent);-webkit-user-select:text;user-select:text}.typost-spoiler-block{color:inherit;background:none;border-radius:0;padding:0;filter:blur(var(--spoiler-blur,.4em));transition:filter .15s ease}.typost-spoiler-block:hover,.typost-spoiler-block:focus-visible{filter:none}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/reset-min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><nav id="nav-bar"><a href="/">home</a> <a href="/post/">post</a> <a href="/leetcode/" class="active">leetcode</a> <a href="/about/">about</a></nav><article class="post"><header class="post-header"><time datetime="2026-09-26">Published on: <span class="accent-data">2026-09-26</span></time><h1>2185 - Counting Words With a Given Prefix</h1></header><main id="typost-content"><h4>Description (<a href="https://leetcode.com/problems/counting-words-with-a-given-prefix/">leetcode</a>)</h4><p>You are given an array of strings <code>words</code> and a string <code>pref</code>.</p><p>Return <em>the number of strings in</em><code>words</code><em>that contain</em><code>pref</code><em>as a <strong>prefix</strong></em>.</p><p>A <strong>prefix</strong> of a string <code>s</code> is any leading contiguous substring of <code>s</code>.</p><p><strong>Example 1:</strong></p><p><strong>Input:</strong> words = [“pay”,“<strong><span style="text-decoration: underline">at</span></strong>tention”,“practice”,“<span style="text-decoration: underline"><strong>at</strong></span>tend”], <code>pref </code>= “at”</p><p><strong>Output:</strong> 2</p><p><strong>Explanation:</strong> The 2 strings that contain “at” as a prefix are: “<span style="text-decoration: underline"><strong>at</strong></span>tention” and “<span style="text-decoration: underline"><strong>at</strong></span>tend”.</p><p><strong>Example 2:</strong></p><p><strong>Input:</strong> words = [“leetcode”,“win”,“loops”,“success”], <code>pref </code>= “code”</p><p><strong>Output:</strong> 0</p><p><strong>Explanation:</strong> There are no strings that contain “code” as a prefix.</p><p><strong>Constraints:</strong></p><ul><li><code>1 &lt;= words.length &lt;= 100</code></li><li><code>1 &lt;= words[i].length, pref.length &lt;= 100</code></li><li><code>words[i]</code> and <code>pref</code> consist of lowercase English letters.</li></ul><hr><h4>submission</h4><div class="typost-spoiler typost-spoiler-block" tabindex="0"><pre><code data-lang="rust"><span style="color: #e78a4e">impl</span> Solution <span style="color: #bdae93">{</span>
+    <span style="color: #e78a4e">pub</span> <span style="color: #e78a4e">fn</span> <span style="color: #a9b665">prefix_count</span><span style="color: #bdae93">(</span>words<span style="color: #bdae93">:</span> <span style="color: #d8a657">Vec</span><span style="color: #bdae93">&lt;</span><span style="color: #d8a657">String</span><span style="color: #bdae93">></span>, pref<span style="color: #bdae93">:</span> String<span style="color: #bdae93">)</span> <span style="color: #bdae93">-></span> <span style="color: #e78a4e">i32</span> <span style="color: #bdae93">{</span>
+        words<span style="color: #bdae93">.</span><span style="color: #89b482">into_iter</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">filter</span><span style="color: #bdae93">(</span><span style="color: #bdae93">|</span>s<span style="color: #bdae93">|</span> s<span style="color: #bdae93">.</span><span style="color: #89b482">starts_with</span><span style="color: #bdae93">(</span><span style="color: #ea6962">&amp;</span>pref<span style="color: #bdae93">)</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">count</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span>
+    <span style="color: #bdae93">}</span>
+<span style="color: #bdae93">}</span></code></pre></div></main><div class="post-tags"><a href="/tags/array/" class="tag">Array</a> <a href="/tags/string/" class="tag">String</a> <a href="/tags/string-matching/" class="tag">String Matching</a> <a href="/difficulty/easy/" class="tag">Easy</a></div></article><footer><hr><div id="footer-container">Made with <a href="https://github.com/serephus/typost">typost</a>.</div></footer></body></html>
