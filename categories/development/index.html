@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>development</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><p><a class="skip-link" href="#main">Skip to content</a></p><header class="site-header"><div class="wrap header-inner"><a href="/" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Serephus</span></a><nav class="site-nav" aria-label="Primary"><a href="/">home</a><a href="/post/">post</a><a href="/leetcode/">leetcode</a><a href="/about/">about</a></nav></div></header><div id="main" class="wrap"><article class="post"><header class="page-header"><h1 class="page-title">development</h1></header><div class="prose"><main id="typost-content"><ul class="content-list"><li class="title-list"><a href="/post/2024-11-23_dota2-match-finder/index.html" class="content-link">DOTA2录像查找</a></li><li class="title-list"><a href="/post/2022-08-02_hexo_github_action/index.html" class="content-link">使用Github Actions来部署hexo博客</a></li><li class="title-list"><a href="/post/2018-07-02_my_first_skse_plugin/index.html" class="content-link">第一个SKSE插件</a></li><li class="title-list"><a href="/post/2015-12-12_minesweeper/index.html" class="content-link">扫雷</a></li></ul></main></div></article></div><footer class="site-footer"><div class="wrap footer-inner"><p>© 2026 Serephus. Made with <a href="https://github.com/serephus/typost">typost</a>.</p><p class="muted"><a href="/atom.xml">RSS</a></p></div></footer></body></html>

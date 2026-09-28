@@ -2,11 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sereph.us/about/index.html</loc></url>
   <url><loc>https://sereph.us/categories/algorithms/index.html</loc></url>
+  <url><loc>https://sereph.us/categories/blog/index.html</loc></url>
+  <url><loc>https://sereph.us/categories/development/index.html</loc></url>
   <url><loc>https://sereph.us/categories/encrypted/index.html</loc></url>
   <url><loc>https://sereph.us/categories/games/index.html</loc></url>
   <url><loc>https://sereph.us/categories/index.html</loc></url>
   <url><loc>https://sereph.us/categories/leetcode/index.html</loc></url>
   <url><loc>https://sereph.us/categories/letter/index.html</loc></url>
+  <url><loc>https://sereph.us/categories/linux/index.html</loc></url>
+  <url><loc>https://sereph.us/categories/machine-learning/index.html</loc></url>
+  <url><loc>https://sereph.us/categories/science/index.html</loc></url>
+  <url><loc>https://sereph.us/categories/thoughts/index.html</loc></url>
   <url><loc>https://sereph.us/difficulty/easy/index.html</loc></url>
   <url><loc>https://sereph.us/difficulty/hard/index.html</loc></url>
   <url><loc>https://sereph.us/difficulty/index.html</loc></url>
