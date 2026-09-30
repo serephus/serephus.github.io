@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>1927 - Sum Game</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><style class="typost-spoiler-style">.typost-spoiler{color:transparent;background:var(--spoiler-bg,rgba(146,131,116,.3));border-radius:.25em;padding:0 .3em;cursor:help;transition:color .15s ease,background-color .15s ease;-webkit-user-select:none;user-select:none}.typost-spoiler:hover,.typost-spoiler:focus-visible{color:inherit;background:var(--spoiler-bg-revealed,transparent);-webkit-user-select:text;user-select:text}.typost-spoiler-block{position:relative;margin:1em 0;cursor:pointer}.typost-spoiler-content{filter:blur(var(--spoiler-blur,.4em));transition:filter .2s ease}.typost-spoiler-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;padding:.35em .9em;border-radius:999px;background:var(--spoiler-hint-bg,rgba(29,32,33,.85));border:1px solid var(--spoiler-border,rgba(146,131,116,.5));color:var(--spoiler-hint,var(--fg-dim,#a89984));font-size:.85rem;white-space:nowrap;pointer-events:none;-webkit-user-select:none;user-select:none;transition:opacity .2s ease}.typost-spoiler-block.is-revealed{cursor:auto}.typost-spoiler-block.is-revealed .typost-spoiler-content{filter:none}.typost-spoiler-block.is-revealed .typost-spoiler-hint{opacity:0}</style><script class="typost-spoiler-script">(function(){function init(){document.querySelectorAll('.typost-spoiler-block').forEach(function(block){function reveal(){block.classList.add('is-revealed')}block.addEventListener('click',reveal,{once:true});block.addEventListener('keydown',function(event){if(block.classList.contains('is-revealed'))return;if(event.key==='Enter'||event.key===' '){event.preventDefault();reveal()}})})}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}})();</script><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><p><a class="skip-link" href="#main">Skip to content</a></p><header class="site-header"><div class="wrap header-inner"><a href="/" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Serephus</span></a><nav class="site-nav" aria-label="Primary"><a href="/">home</a><a href="/post/">post</a><a href="/leetcode/" aria-current="page">leetcode</a><a href="/about/">about</a></nav></div></header><div id="main" class="wrap"><article class="post"><header class="page-header"><h1 class="page-title">1927 - Sum Game</h1><p class="page-meta"><time datetime="2026-09-28">2026-09-28</time><span class="sep" aria-hidden="true">·</span><a href="/tags/math/" class="tag">#Math</a><span class="sep" aria-hidden="true">·</span><a href="/tags/string/" class="tag">#String</a><span class="sep" aria-hidden="true">·</span><a href="/tags/greedy/" class="tag">#Greedy</a><span class="sep" aria-hidden="true">·</span><a href="/tags/game-theory/" class="tag">#Game Theory</a><span class="sep" aria-hidden="true">·</span><a href="/difficulty/medium/" class="tag">#Medium</a></p></header><div class="prose"><main id="typost-content"><h4>Description (<a href="https://leetcode.com/problems/sum-game/">leetcode</a>)</h4><p>Alice and Bob take turns playing a game, with <strong>Alice</strong><strong> starting first</strong>.</p><p>You are given a string <code>num</code> of <strong>even length</strong> consisting of digits and <code>'?'</code> characters. On each turn, a player will do the following if there is still at least one <code>'?'</code> in <code>num</code>:</p><ol><li>Choose an index <code>i</code> where <code>num[i] == '?'</code>.</li><li>Replace <code>num[i]</code> with any digit between <code>'0'</code> and <code>'9'</code>.</li></ol><p>The game ends when there are no more <code>'?'</code> characters in <code>num</code>.</p><p>For Bob to win, the sum of the digits in the first half of <code>num</code> must be <strong>equal</strong> to the sum of the digits in the second half. For Alice to win, the sums must <strong>not be equal</strong>.</p><ul><li>For example, if the game ended with <code>num = "243801"</code>, then Bob wins because <code>2+4+3 = 8+0+1</code>. If the game ended with <code>num = "243803"</code>, then Alice wins because <code>2+4+3 != 8+0+3</code>.</li></ul><p>Assuming Alice and Bob play <strong>optimally</strong>, return <code>true</code> <em>if Alice will win and</em><code>false</code> <em>if Bob will win</em>.</p><p><strong>Example 1:</strong></p><p><strong>Input:</strong> num = “5023”</p><p><strong>Output:</strong> false</p><p><strong>Explanation:</strong> There are no moves to be made.</p><p>The sum of the first half is equal to the sum of the second half: 5 + 0 = 2 + 3.</p><p><strong>Example 2:</strong></p><p><strong>Input:</strong> num = “25??”</p><p><strong>Output:</strong> true</p><p><strong>Explanation:</strong>Alice can replace one of the ‘?’s with ‘9’ and it will be impossible for Bob to make the sums equal.</p><p><strong>Example 3:</strong></p><p><strong>Input:</strong> num = “?3295???”</p><p><strong>Output:</strong> false</p><p><strong>Explanation:</strong> It can be proven that Bob will always win. One possible outcome is:</p><ul><li><p>Alice replaces the first ‘?’ with ‘9’. num = “93295???”.</p></li><li><p>Bob replaces one of the ‘?’ in the right half with ‘9’. num = “932959??”.</p></li><li><p>Alice replaces one of the ‘?’ in the right half with ‘2’. num = “9329592?”.</p></li><li><p>Bob replaces the last ‘?’ in the right half with ‘7’. num = “93295927”.</p></li></ul><p>Bob wins because 9 + 3 + 2 + 9 = 5 + 9 + 2 + 7.</p><p><strong>Constraints:</strong></p><ul><li>2 &lt;= num.length &lt;= 10<sup>5</sup></li><li><code>num.length</code> is <strong>even</strong>.</li><li><code>num</code> consists of only digits and <code>'?'</code>.</li></ul><hr><h4>submission</h4><div class="typost-spoiler-block" tabindex="0"><span class="typost-spoiler-hint">click to reveal</span><div class="typost-spoiler-content"><pre><code data-lang="rust"><span style="color: #e78a4e">impl</span> Solution <span style="color: #bdae93">{</span>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> very impressive ascii trick</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> '0' -> '9'</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> 0x30 -> 0x39</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> 48 -> 57</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> 2 * c % 32 % 21</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> 0, 2, 4, .., 18</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> '?' = 0x3F = 63 => (63 * 2 % 32 % 21) => 9</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> each digit contribute +/- double their real value</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> each '?' contribute +/- 9 to count</span></em>
+    <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> Bob wins when the final count is balanced (e.g. ==0)</span></em>
+    <span style="color: #e78a4e">fn</span> <span style="color: #a9b665">sum_game</span><span style="color: #bdae93">(</span>num<span style="color: #bdae93">:</span> String<span style="color: #bdae93">)</span> <span style="color: #bdae93">-></span> <span style="color: #e78a4e">bool</span> <span style="color: #bdae93">{</span>
+        num<span style="color: #bdae93">.</span><span style="color: #89b482">bytes</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">enumerate</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">fold</span><span style="color: #bdae93">(</span><span style="color: #d3869b">0</span><span style="color: #bdae93">,</span> <span style="color: #bdae93">|</span>s<span style="color: #bdae93">,</span> <span style="color: #bdae93">(</span>i<span style="color: #bdae93">,</span> c<span style="color: #bdae93">)</span><span style="color: #bdae93">|</span> <span style="color: #bdae93">{</span>
+            s <span style="color: #ea6962">+</span> <span style="color: #bdae93">(</span><span style="color: #bdae93">(</span>i <span style="color: #ea6962">*</span> <span style="color: #d3869b">2</span> <span style="color: #ea6962">&lt;</span> num<span style="color: #bdae93">.</span><span style="color: #89b482">len</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span> <span style="color: #ea6962">*</span> <span style="color: #d3869b">4</span> <span style="color: #ea6962">-</span> <span style="color: #d3869b">2</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">*</span> c <span style="color: #ea6962">as</span> <span style="color: #e78a4e">i32</span> <span style="color: #ea6962">%</span> <span style="color: #d3869b">32</span> <span style="color: #ea6962">%</span> <span style="color: #d3869b">21</span>
+        <span style="color: #bdae93">}</span><span style="color: #bdae93">)</span> <span style="color: #ea6962">!=</span> <span style="color: #d3869b">0</span>
+    <span style="color: #bdae93">}</span>
+<span style="color: #bdae93">}</span></code></pre></div></div></main></div></article></div><footer class="site-footer"><div class="wrap footer-inner"><p>© 2026 Serephus. Made with <a href="https://github.com/serephus/typost">typost</a>.</p><p class="muted"><a href="/atom.xml">RSS</a></p></div></footer></body></html>
