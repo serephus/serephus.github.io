@@ -1,9 +1,12 @@
 /* ==========================================================================
-   Gruvbox Material — dark palette
-   https://github.com/sainnhe/gruvbox-material
+   Gruvbox Material — dark theme
+   Layout adapted from the `exp4` personal-site demo (solid sticky navbar,
+   800px reading column, card listings), recoloured with the Gruvbox Material
+   palette used across this site.
    ========================================================================== */
 
 :root {
+  /* Gruvbox Material — dark palette. */
   --bg-dim: #1b1b1b;
   --bg0: #282828;
   --bg1: #32302f;
@@ -37,12 +40,11 @@
   --bg-aqua: #3a4038;
 
   --accent: var(--blue);
-  --radius: 10px;
-  --radius-sm: 6px;
-  --wrap: 48rem;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --wrap: 800px;
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
 }
@@ -61,12 +63,15 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   margin: 0;
   background: var(--bg-dim);
   color: var(--fg1);
   font-family: var(--font-sans);
   font-size: clamp(0.97rem, 0.93rem + 0.2vw, 1.05rem);
-  line-height: 1.7;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -100,10 +105,10 @@ svg {
   left: -999px;
   top: 0;
   z-index: 100;
-  background: var(--bg3);
-  color: var(--fg0);
   padding: 0.6rem 1rem;
+  background: var(--bg3);
   border-radius: 0 0 var(--radius-sm) 0;
+  color: var(--fg0);
 }
 
 .skip-link:focus {
@@ -115,70 +120,58 @@ svg {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 20;
-  background: color-mix(in srgb, var(--bg-dim) 88%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--bg1);
+  z-index: 100;
+  background: var(--bg0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  min-height: 3.75rem;
+  gap: 1.5rem;
+  padding-block: 1rem;
 }
 
 .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  color: var(--fg0);
+  color: var(--orange);
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.01em;
+  line-height: 1;
   text-decoration: none;
 }
 
-.brand-mark {
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 50%;
-  background: var(--orange);
-  box-shadow: 0 0 0 4px var(--bg1);
-}
-
-.brand:hover .brand-mark {
-  background: var(--yellow);
+.brand:hover {
+  color: var(--yellow);
 }
 
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.15rem;
+  gap: 1.75rem;
 }
 
 .site-nav a {
-  padding: 0.35rem 0.6rem;
-  border-radius: var(--radius-sm);
   color: var(--grey2);
-  font-size: 0.94rem;
+  font-weight: 500;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .site-nav a:hover {
-  background: var(--bg1);
   color: var(--fg0);
 }
 
 .site-nav a[aria-current="page"] {
-  background: var(--bg1);
-  color: var(--fg0);
+  color: var(--orange);
 }
 
 /* ---------------------------------------------------------------- main --- */
 
-main {
-  padding-block: clamp(2rem, 5vw, 3.5rem);
+#main.wrap {
+  flex: 1;
+  padding-block: clamp(2rem, 5vw, 3rem);
 }
 
 /* ---------------------------------------------------------------- hero --- */
@@ -188,28 +181,28 @@ main {
   align-items: center;
   gap: clamp(1.25rem, 4vw, 2.5rem);
   margin-bottom: clamp(2rem, 4vw, 3rem);
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  background: linear-gradient(160deg, var(--bg0), var(--bg-dim));
-  border: 1px solid var(--bg1);
-  border-radius: calc(var(--radius) + 4px);
 }
 
 .avatar {
   flex: 0 0 auto;
   width: 132px;
   height: 132px;
-  border: 3px solid var(--bg3);
-  border-radius: 50%;
   background: var(--bg1);
+  border: 4px solid var(--bg3);
+  border-radius: 50%;
   object-fit: cover;
 }
 
+.hero-text {
+  min-width: 0;
+}
+
 .hero-name {
-  margin: 0;
+  margin: 0 0 1rem;
   color: var(--yellow);
   font-size: clamp(1.8rem, 1.3rem + 2vw, 2.6rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 /* -------------------------------------------------------- page header --- */
@@ -222,8 +215,8 @@ main {
   margin: 0;
   color: var(--fg0);
   font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.3rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .page-meta {
@@ -255,17 +248,14 @@ main {
 .prose h4,
 .prose h5,
 .prose h6 {
-  margin: 2.2em 0 0.7em;
+  margin: 2rem 0 1rem;
   color: var(--fg0);
   font-weight: 700;
   line-height: 1.25;
-  letter-spacing: -0.01em;
   scroll-margin-top: 5rem;
 }
 
 .prose h2 {
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--bg2);
   font-size: 1.5rem;
 }
 
@@ -285,23 +275,26 @@ main {
 }
 
 .prose p {
-  margin: 0 0 1.1em;
+  margin: 0 0 1.5rem;
 }
 
 .prose a {
   color: var(--blue);
-  text-decoration-color: color-mix(in srgb, var(--blue) 45%, transparent);
-  text-underline-offset: 2px;
+  text-decoration: none;
 }
 
 .prose a:hover {
   color: var(--aqua);
-  text-decoration-color: currentColor;
+  text-decoration: underline;
 }
 
 .prose strong {
   color: var(--fg0);
   font-weight: 700;
+}
+
+.prose em {
+  color: var(--fg0);
 }
 
 .prose mark {
@@ -316,10 +309,10 @@ main {
 }
 
 .prose hr {
-  height: 1px;
-  margin: 2.5em 0;
-  background: var(--bg2);
+  height: 0;
+  margin: 2.5rem 0;
   border: 0;
+  border-top: 1px solid var(--bg2);
 }
 
 .prose abbr {
@@ -340,12 +333,12 @@ main {
 
 .prose ul,
 .prose ol {
-  margin: 0 0 1.1em;
-  padding-left: 1.4em;
+  margin: 0 0 1.5rem;
+  padding-left: 1.5rem;
 }
 
 .prose li {
-  margin: 0.35em 0;
+  margin: 0.4em 0;
 }
 
 .prose li::marker {
@@ -364,12 +357,13 @@ main {
 }
 
 .prose blockquote {
-  margin: 1.5em 0;
-  padding: 0.8em 1.1em;
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
   background: var(--bg0);
-  border-left: 3px solid var(--aqua);
+  border-left: 4px solid var(--aqua);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   color: var(--fg2);
+  font-style: italic;
 }
 
 .prose blockquote p:last-child {
@@ -386,19 +380,17 @@ main {
 }
 
 .prose :not(pre) > code {
-  padding: 0.12em 0.4em;
+  padding: 0.2rem 0.4rem;
   background: var(--bg1);
-  border: 1px solid var(--bg3);
   border-radius: 4px;
   color: var(--orange);
   overflow-wrap: anywhere;
 }
 
 .prose pre {
-  margin: 1.4em 0;
-  padding: 1rem 1.1rem;
-  background: var(--bg-dim);
-  border: 1px solid var(--bg1);
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--bg0);
   border-radius: var(--radius);
   line-height: 1.6;
   overflow-x: auto;
@@ -437,24 +429,23 @@ main {
 }
 
 .prose img {
-  border: 1px solid var(--bg1);
   border-radius: var(--radius);
 }
 
 .prose figure {
-  margin: 1.5em 0;
+  margin: 1.5rem 0;
 }
 
 .prose figcaption {
-  margin-top: 0.5em;
+  margin-top: 0.5rem;
   color: var(--grey2);
   font-size: 0.85rem;
   text-align: center;
 }
 
 .prose details {
-  margin: 1.2em 0;
-  padding: 0.8em 1.1em;
+  margin: 1.5rem 0;
+  padding: 0.8rem 1rem;
   background: var(--bg0);
   border: 1px solid var(--bg1);
   border-radius: var(--radius);
@@ -480,21 +471,24 @@ main {
 
 .posts {
   display: grid;
-  gap: 0.9rem;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .post-item {
-  padding: 1rem 1.15rem;
+  padding: 1.5rem;
   background: var(--bg0);
   border: 1px solid var(--bg1);
   border-radius: var(--radius);
-  transition: border-color 0.15s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .post-item:hover {
+  transform: translateY(-5px);
   border-color: var(--bg4);
 }
 
@@ -532,21 +526,26 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: var(--chip-gap);
-  margin: 0.6rem 0 0;
+  margin: 0.75rem 0 0;
 }
 
 .tag {
-  padding: 0.12rem 0.45rem;
+  padding: 0.12rem 0.5rem;
   background: var(--bg-aqua);
   border: 1px solid color-mix(in srgb, var(--aqua) 30%, transparent);
   border-radius: 999px;
   color: var(--aqua);
   font-family: var(--font-mono);
   font-size: 0.78rem;
+  text-decoration: none;
+}
+
+.tag:hover {
+  color: var(--fg0);
 }
 
 .more {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .more a {
@@ -557,24 +556,23 @@ main {
 
 .more a:hover {
   color: var(--aqua);
+  text-decoration: underline;
 }
 
 /* -------------------------------------------------------------- footer --- */
 
 .site-footer {
   margin-top: clamp(2.5rem, 6vw, 4rem);
-  padding-block: 1.5rem;
+  padding-block: 2rem;
   background: var(--bg-dim);
   border-top: 1px solid var(--bg1);
   color: var(--grey1);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .footer-inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
+  text-align: center;
 }
 
 .site-footer p {
@@ -583,19 +581,17 @@ main {
 
 .site-footer a {
   color: var(--grey2);
+  text-decoration: none;
 }
 
 .site-footer a:hover {
   color: var(--blue);
+  text-decoration: underline;
 }
 
 .sep {
   margin-inline: 0.5rem;
   color: var(--grey0);
-}
-
-.muted {
-  color: var(--grey1);
 }
 
 /* --------------------------------------------------------------- small --- */
@@ -610,6 +606,14 @@ main {
   .post-link {
     flex-direction: column;
     gap: 0.15rem;
+  }
+
+  .header-inner {
+    gap: 1rem;
+  }
+
+  .site-nav {
+    gap: 1rem;
   }
 }
 
