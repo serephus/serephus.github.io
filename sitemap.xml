@@ -151,36 +151,36 @@
   <url><loc>https://sereph.us/leetcode/valid-palindrome/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/valid-parentheses/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/water-bottles/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2015-11-23_blog_summary/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2015-12-12_minesweeper/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-01-29_gradient_descent_implementation/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-01-31_gradient_descent_vectorization/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-02-01_simple_captcha_recognization_using_logistic_regression/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-02-05_vector_form_of_cost_function/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-02-06_normal_equation/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-02-17_general_linear_model/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-02-18_how_things_work/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-02-20_fibonacci_sequence/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-02-25_q_learning_flappy_bird/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-03-30_some_thoughts_on_GPL/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2017-04-17_some_thoughts_on_teleport_machine/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2018-05-24_new_beginning/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2018-07-02_my_first_skse_plugin/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2019-02-18_visceral-attacks/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2020-04-03_install_gentoo_on_vultr/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2020-11-14_shulker_update/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2021-06-19_leetcode0001/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2021-06-20_leetcode0002/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2021-06-25_leetcode0003/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2021-06-27_leetcode0004/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2021-07-04_leetcode0005/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2021-07-11_leetcode0006/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2022-07-26_dwm_on_gentoo/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2022-08-02_hexo_github_action/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2024-11-23_dota2-match-finder/index.html</loc></url>
-  <url><loc>https://sereph.us/post/2025-10-26_single-number/index.html</loc></url>
+  <url><loc>https://sereph.us/post/blog_summary/index.html</loc></url>
+  <url><loc>https://sereph.us/post/dota2-match-finder/index.html</loc></url>
+  <url><loc>https://sereph.us/post/dwm_on_gentoo/index.html</loc></url>
   <url><loc>https://sereph.us/post/echoes-from-the-past/index.html</loc></url>
+  <url><loc>https://sereph.us/post/fibonacci_sequence/index.html</loc></url>
+  <url><loc>https://sereph.us/post/general_linear_model/index.html</loc></url>
+  <url><loc>https://sereph.us/post/gradient_descent_implementation/index.html</loc></url>
+  <url><loc>https://sereph.us/post/gradient_descent_vectorization/index.html</loc></url>
+  <url><loc>https://sereph.us/post/hexo_github_action/index.html</loc></url>
+  <url><loc>https://sereph.us/post/how_things_work/index.html</loc></url>
   <url><loc>https://sereph.us/post/index.html</loc></url>
+  <url><loc>https://sereph.us/post/install_gentoo_on_vultr/index.html</loc></url>
+  <url><loc>https://sereph.us/post/leetcode0001/index.html</loc></url>
+  <url><loc>https://sereph.us/post/leetcode0002/index.html</loc></url>
+  <url><loc>https://sereph.us/post/leetcode0003/index.html</loc></url>
+  <url><loc>https://sereph.us/post/leetcode0004/index.html</loc></url>
+  <url><loc>https://sereph.us/post/leetcode0005/index.html</loc></url>
+  <url><loc>https://sereph.us/post/leetcode0006/index.html</loc></url>
+  <url><loc>https://sereph.us/post/minesweeper/index.html</loc></url>
+  <url><loc>https://sereph.us/post/my_first_skse_plugin/index.html</loc></url>
+  <url><loc>https://sereph.us/post/new_beginning/index.html</loc></url>
+  <url><loc>https://sereph.us/post/normal_equation/index.html</loc></url>
+  <url><loc>https://sereph.us/post/q_learning_flappy_bird/index.html</loc></url>
+  <url><loc>https://sereph.us/post/shulker_update/index.html</loc></url>
+  <url><loc>https://sereph.us/post/simple_captcha_recognization_using_logistic_regression/index.html</loc></url>
+  <url><loc>https://sereph.us/post/single-number/index.html</loc></url>
+  <url><loc>https://sereph.us/post/some_thoughts_on_GPL/index.html</loc></url>
+  <url><loc>https://sereph.us/post/some_thoughts_on_teleport_machine/index.html</loc></url>
+  <url><loc>https://sereph.us/post/vector_form_of_cost_function/index.html</loc></url>
+  <url><loc>https://sereph.us/post/visceral-attacks/index.html</loc></url>
   <url><loc>https://sereph.us/tags/array/index.html</loc></url>
   <url><loc>https://sereph.us/tags/backtracking/index.html</loc></url>
   <url><loc>https://sereph.us/tags/binary-indexed-tree/index.html</loc></url>
