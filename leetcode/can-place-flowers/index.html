@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>0605 - Can Place Flowers</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><style class="typost-spoiler-style">.typost-spoiler{color:transparent;background:var(--spoiler-bg,rgba(146,131,116,.3));border-radius:.25em;padding:0 .3em;cursor:help;transition:color .15s ease,background-color .15s ease;-webkit-user-select:none;user-select:none}.typost-spoiler:hover,.typost-spoiler:focus-visible{color:inherit;background:var(--spoiler-bg-revealed,transparent);-webkit-user-select:text;user-select:text}.typost-spoiler-block{position:relative;margin:1em 0;cursor:pointer}.typost-spoiler-content{filter:blur(var(--spoiler-blur,.4em));transition:filter .2s ease}.typost-spoiler-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;padding:.35em .9em;border-radius:999px;background:var(--spoiler-hint-bg,rgba(29,32,33,.85));border:1px solid var(--spoiler-border,rgba(146,131,116,.5));color:var(--spoiler-hint,var(--fg-dim,#a89984));font-size:.85rem;white-space:nowrap;pointer-events:none;-webkit-user-select:none;user-select:none;transition:opacity .2s ease}.typost-spoiler-block.is-revealed{cursor:auto}.typost-spoiler-block.is-revealed .typost-spoiler-content{filter:none}.typost-spoiler-block.is-revealed .typost-spoiler-hint{opacity:0}</style><script class="typost-spoiler-script">(function(){function init(){document.querySelectorAll('.typost-spoiler-block').forEach(function(block){function reveal(){block.classList.add('is-revealed')}block.addEventListener('click',reveal,{once:true});block.addEventListener('keydown',function(event){if(block.classList.contains('is-revealed'))return;if(event.key==='Enter'||event.key===' '){event.preventDefault();reveal()}})})}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}})();</script><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><p><a class="skip-link" href="#main">Skip to content</a></p><header class="site-header"><div class="wrap header-inner"><a href="/" class="brand"><span class="brand-name">Serephus</span></a><nav class="site-nav" aria-label="Primary"><a href="/">home</a><a href="/post/">post</a><a href="/leetcode/" aria-current="page">leetcode</a><a href="/about/">about</a></nav></div></header><div id="main" class="wrap"><article class="post"><header class="page-header"><h1 class="page-title">0605 - Can Place Flowers</h1><p class="page-meta"><time datetime="2026-10-07">2026-10-07</time><span class="sep" aria-hidden="true">·</span><a href="/tags/array/" class="tag">#Array</a><span class="sep" aria-hidden="true">·</span><a href="/tags/greedy/" class="tag">#Greedy</a><span class="sep" aria-hidden="true">·</span><a href="/difficulty/easy/" class="tag">#Easy</a></p></header><div class="prose"><main id="typost-content"><h4>Description (<a href="https://leetcode.com/problems/can-place-flowers/">leetcode</a>)</h4><p>You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in <strong>adjacent</strong> plots.</p><p>Given an integer array <code>flowerbed</code> containing <code>0</code>′s and <code>1</code>′s, where <code>0</code> means empty and <code>1</code> means not empty, and an integer <code>n</code>, return <code>true</code> <em>if</em> <code>n</code> <em>new flowers can be planted in the</em> <code>flowerbed</code> <em>without violating the no-adjacent-flowers rule and</em> <code>false</code> <em>otherwise</em>.</p><p><strong>Example 1:</strong></p><p><strong>Input:</strong> flowerbed = [1,0,0,0,1], n = 1</p><p><strong>Output:</strong> true</p><p><strong>Example 2:</strong></p><p><strong>Input:</strong> flowerbed = [1,0,0,0,1], n = 2</p><p><strong>Output:</strong> false</p><p><strong>Constraints:</strong></p><ul><li>1 &lt;= flowerbed.length &lt;= 2 * 10<sup>4</sup></li><li><code>flowerbed[i]</code> is <code>0</code> or <code>1</code>.</li><li>There are no two adjacent flowers in <code>flowerbed</code>.</li><li><code>0 &lt;= n &lt;= flowerbed.length</code></li></ul><hr><h4>submission</h4><div class="typost-spoiler-block" tabindex="0"><span class="typost-spoiler-hint">click to reveal</span><div class="typost-spoiler-content"><pre><code data-lang="rust"><span style="color: #e78a4e">impl</span> Solution <span style="color: #bdae93">{</span>
+    <span style="color: #e78a4e">pub</span> <span style="color: #e78a4e">fn</span> <span style="color: #a9b665">can_place_flowers</span><span style="color: #bdae93">(</span><span style="color: #e78a4e">mut</span> flowerbed<span style="color: #bdae93">:</span> <span style="color: #d8a657">Vec</span><span style="color: #bdae93">&lt;</span><span style="color: #e78a4e">i32</span><span style="color: #bdae93">></span>, n<span style="color: #bdae93">:</span> <span style="color: #e78a4e">i32</span><span style="color: #bdae93">)</span> <span style="color: #bdae93">-></span> <span style="color: #e78a4e">bool</span> <span style="color: #bdae93">{</span>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> this is a more idiomatic Rust solution, however this insertion is expensive</span></em>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> flowerbed.insert(0, 0);</span></em>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> flowerbed.push(0);</span></em>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374"> flowerbed</span></em>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374">     .chunk_by(|&amp;a, &amp;b| a == b)</span></em>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374">     .map(|chunk| (chunk.len() as i32 - 1) / 2)</span></em>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374">     .sum::&lt;i32>()</span></em>
+        <em><span style="color: #928374">//</span></em><em><span style="color: #928374">     >= n</span></em>
+
+        <span style="color: #e78a4e">let</span> len <span style="color: #ea6962">=</span> flowerbed<span style="color: #bdae93">.</span><span style="color: #89b482">len</span><span style="color: #bdae93">(</span><span style="color: #bdae93">)</span><span style="color: #bdae93">;</span>
+        <span style="color: #e78a4e">let</span> <span style="color: #e78a4e">mut</span> planted <span style="color: #ea6962">=</span> <span style="color: #d3869b">0</span><span style="color: #bdae93">;</span>
+
+        <span style="color: #bdae93">(</span><span style="color: #d3869b">0</span><span style="color: #ea6962">..</span>len<span style="color: #bdae93">)</span><span style="color: #bdae93">.</span><span style="color: #89b482">any</span><span style="color: #bdae93">(</span><span style="color: #bdae93">|</span>i<span style="color: #bdae93">|</span> <span style="color: #bdae93">{</span>
+            <span style="color: #ea6962">if</span> flowerbed<span style="color: #bdae93">[</span>i<span style="color: #bdae93">]</span> <span style="color: #ea6962">==</span> <span style="color: #d3869b">0</span>
+                <span style="color: #ea6962">&amp;&amp;</span> <span style="color: #bdae93">(</span>i <span style="color: #ea6962">==</span> <span style="color: #d3869b">0</span> <span style="color: #ea6962">||</span> flowerbed<span style="color: #bdae93">[</span>i <span style="color: #ea6962">-</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">]</span> <span style="color: #ea6962">==</span> <span style="color: #d3869b">0</span><span style="color: #bdae93">)</span>
+                <span style="color: #ea6962">&amp;&amp;</span> <span style="color: #bdae93">(</span>i <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span> <span style="color: #ea6962">==</span> len <span style="color: #ea6962">||</span> flowerbed<span style="color: #bdae93">[</span>i <span style="color: #ea6962">+</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">]</span> <span style="color: #ea6962">==</span> <span style="color: #d3869b">0</span><span style="color: #bdae93">)</span>
+            <span style="color: #bdae93">{</span>
+                flowerbed<span style="color: #bdae93">[</span>i<span style="color: #bdae93">]</span> <span style="color: #ea6962">=</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">;</span>
+                planted <span style="color: #ea6962">+=</span> <span style="color: #d3869b">1</span><span style="color: #bdae93">;</span>
+            <span style="color: #bdae93">}</span>
+            planted <span style="color: #ea6962">>=</span> n
+        <span style="color: #bdae93">}</span><span style="color: #bdae93">)</span>
+    <span style="color: #bdae93">}</span>
+<span style="color: #bdae93">}</span></code></pre></div></div></main></div></article></div><footer class="site-footer"><div class="wrap footer-inner"><p>© 2026 Serephus <span class="sep" aria-hidden="true">·</span> Made with <a href="https://github.com/serephus/typost">typost</a> <span class="sep" aria-hidden="true">·</span> <a href="/atom.xml">RSS</a></p></div></footer></body></html>
