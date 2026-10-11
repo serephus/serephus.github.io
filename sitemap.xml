@@ -75,6 +75,7 @@
   <url><loc>https://sereph.us/leetcode/largest-combination-with-bitwise-and-greater-than-zero/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/largest-perimeter-triangle/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/length-of-last-word/index.html</loc></url>
+  <url><loc>https://sereph.us/leetcode/limit-occurrences-in-sorted-array/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/longest-common-prefix/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/majority-element/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/maximize-points-after-choosing-k-tasks/index.html</loc></url>
@@ -125,6 +126,7 @@
   <url><loc>https://sereph.us/leetcode/rotate-image/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/same-tree/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/search-insert-position/index.html</loc></url>
+  <url><loc>https://sereph.us/leetcode/shortest-palindrome/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/shortest-path-in-binary-matrix/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/single-number-ii/index.html</loc></url>
   <url><loc>https://sereph.us/leetcode/single-number-iii/index.html</loc></url>
@@ -205,12 +207,14 @@
   <url><loc>https://sereph.us/tags/game-theory/index.html</loc></url>
   <url><loc>https://sereph.us/tags/graph-theory/index.html</loc></url>
   <url><loc>https://sereph.us/tags/greedy/index.html</loc></url>
+  <url><loc>https://sereph.us/tags/hash-function/index.html</loc></url>
   <url><loc>https://sereph.us/tags/hash-table/index.html</loc></url>
   <url><loc>https://sereph.us/tags/heap-(priority-queue)/index.html</loc></url>
   <url><loc>https://sereph.us/tags/index.html</loc></url>
   <url><loc>https://sereph.us/tags/knuth–morris–pratt-algorithm/index.html</loc></url>
   <url><loc>https://sereph.us/tags/lexicographically-minimal-string-rotation/index.html</loc></url>
   <url><loc>https://sereph.us/tags/linked-list/index.html</loc></url>
+  <url><loc>https://sereph.us/tags/manacher/index.html</loc></url>
   <url><loc>https://sereph.us/tags/math/index.html</loc></url>
   <url><loc>https://sereph.us/tags/matrix/index.html</loc></url>
   <url><loc>https://sereph.us/tags/memoization/index.html</loc></url>
@@ -224,6 +228,7 @@
   <url><loc>https://sereph.us/tags/prefix-sum/index.html</loc></url>
   <url><loc>https://sereph.us/tags/quicksort/index.html</loc></url>
   <url><loc>https://sereph.us/tags/recursion/index.html</loc></url>
+  <url><loc>https://sereph.us/tags/rolling-hash/index.html</loc></url>
   <url><loc>https://sereph.us/tags/segment-tree/index.html</loc></url>
   <url><loc>https://sereph.us/tags/simulation/index.html</loc></url>
   <url><loc>https://sereph.us/tags/sliding-window/index.html</loc></url>
