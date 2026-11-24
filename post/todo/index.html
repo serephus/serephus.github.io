@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Todo</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="alternate" type="application/atom+xml" title="Serephus" href="/atom.xml"></head><body><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/custom.css"><p><a class="skip-link" href="#main">Skip to content</a></p><header class="site-header"><div class="wrap header-inner"><a href="/" class="brand"><span class="brand-name">Serephus</span></a><nav class="site-nav" aria-label="Primary"><a href="/">home</a><a href="/post/" aria-current="page">post</a><a href="/leetcode/">leetcode</a><a href="/about/">about</a></nav></div></header><div id="main" class="wrap"><article class="post"><header class="page-header"><h1 class="page-title">Todo</h1><p class="page-meta"><time datetime="2026-10-26">2026-10-26</time><span class="sep" aria-hidden="true">·</span><a href="/categories/encrypted/" class="tag">#Encrypted</a><span class="sep" aria-hidden="true">·</span><a href="/categories/todo/" class="tag">#Todo</a></p></header><div class="prose"><main id="typost-content"><h2>Todo</h2><h3>Learning</h3><ul><li>Rust</li><li>Haskell</li><li>nix</li><li>Idris2</li><li>zig</li><li>koka</li><li>Bevy</li><li>Electronic Engineering</li><li>LLM from scratch</li><li>Stable diffusion</li><li>OS</li></ul><div class="typost-encrypted"><div class="typost-lock"><style>.typost-lock{max-width:26rem;margin:3rem auto;padding:1.5rem;text-align:center;background:var(--surface,#32302f);border:1px solid var(--surface-2,#3c3836);border-radius:var(--radius,10px);box-shadow:0 12px 32px -24px rgba(0,0,0,.8)}.typost-lock-hint{margin:0 0 1rem;color:var(--fg-dim,#a89984);font-size:.95rem}.typost-lock form{display:flex;flex-direction:column;gap:.6rem}.typost-lock input{width:100%;box-sizing:border-box;padding:.6rem .8rem;background:var(--bg-soft,#282828);color:var(--fg,#d4be98);border:1px solid var(--border,#504945);border-radius:8px;font:inherit;outline:none}.typost-lock input:focus{border-color:var(--accent,#a9b665)}.typost-lock button{padding:.6rem 1.2rem;border:0;border-radius:8px;cursor:pointer;background:var(--accent,#a9b665);color:var(--bg,#1d2021);font:inherit;font-weight:600}.typost-lock button:hover{opacity:.9}.typost-lock-error{margin:.2rem 0 0;color:var(--red,#ea6962);font-size:.9rem}</style><form class="typost-lock-form"><p class="typost-lock-hint">private todo section</p><input type="password" class="typost-lock-password" autocomplete="current-password" placeholder="Password"><button type="submit">Unlock</button><p class="typost-lock-error" role="alert" hidden>Wrong password.</p></form><script type="application/json" class="typost-lock-params">{"salt":"Z/dzEQIVpkn8lxcfN9koLQ==","iv":"YYln6xIP7/M5YWBU","iterations":600000}</script><script type="text/plain" class="typost-lock-cipher">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</script><script>
+(function () {
+  var lock = document.currentScript.closest('.typost-lock');
+  if (!lock) return;
+  var params = JSON.parse(lock.querySelector('.typost-lock-params').textContent);
+  var cipherB64 = lock.querySelector('.typost-lock-cipher').textContent.trim();
+  var form = lock.querySelector('form');
+  var input = lock.querySelector('.typost-lock-password');
+  var error = lock.querySelector('.typost-lock-error');
+  function bytes(b64) {
+    return Uint8Array.from(atob(b64), function (c) { return c.charCodeAt(0); });
+  }
+  if (!window.crypto || !window.crypto.subtle) {
+    error.hidden = false;
+    error.textContent = 'WebCrypto is unavailable; serve this site over http(s).';
+    return;
+  }
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    error.hidden = true;
+    var encoder = new TextEncoder();
+    window.crypto.subtle
+      .importKey('raw', encoder.encode(input.value), 'PBKDF2', false, ['deriveKey'])
+      .then(function (material) {
+        return window.crypto.subtle.deriveKey(
+          { name: 'PBKDF2', salt: bytes(params.salt), iterations: params.iterations, hash: 'SHA-256' },
+          material,
+          { name: 'AES-GCM', length: 256 },
+          false,
+          ['decrypt']
+        );
+      })
+      .then(function (key) {
+        return window.crypto.subtle.decrypt(
+          { name: 'AES-GCM', iv: bytes(params.iv) },
+          key,
+          bytes(cipherB64)
+        );
+      })
+      .then(function (plain) {
+        var holder = document.createElement('div');
+        holder.innerHTML = new TextDecoder().decode(plain);
+        var parent = lock.parentNode;
+        while (holder.firstChild) parent.insertBefore(holder.firstChild, lock);
+        parent.removeChild(lock);
+      })
+      .catch(function () {
+        error.hidden = false;
+        error.textContent = 'Wrong password.';
+        input.select();
+      });
+  });
+})();
+</script></div></div><h3>Movies</h3><ul><li><p>☐ 路边野餐</p></li><li><p>☐ 万箭穿心</p></li><li><p>☐ 饮食男女</p></li><li><p>☐ 大佛普拉斯</p></li><li><p>☐ 喜宴</p></li><li><p>☐ 牯岭街少年杀人事件</p></li><li><p>☐ 悲情城市</p></li><li><p>☐ 恐怖分子</p></li><li><p>☐ 大菩萨岭</p></li><li><p>☐ 撒旦探戈</p></li><li><p>☐ 时时刻刻</p></li><li><p>☐ 无可奈何</p></li><li><p>☐ 初吻</p></li><li><p>☐ 浪浪山小妖怪</p></li><li><p>☐ 爱情神话</p></li><li><p>☐ 秋日何时来</p></li><li><p>☐ 夜班</p></li><li><p>☐ 一战再战</p></li><li><p>☐ 看我怎么说</p></li><li><p>☐ 震耳欲聋</p></li><li><p>☐ 普通事故</p></li><li><p>☐ 情感价值</p></li><li><p>☐ 空山灵雨</p></li><li><p>☒ 一一 ★★★★★★★★★☆</p></li><li><p>☒ 南海十三郎 ★★★★★★★★★☆</p></li></ul><h3>TVs</h3><ul><li>☐ 迪迦奥特曼</li><li>☐ 火线</li><li>☐ 切尔诺贝利</li></ul><h3>Games</h3><ul><li>☐ Maxwell’s Puzzling Demon</li><li>☐ 幽灵诡计</li><li>☐ Ooo</li><li>☐ If on a winter’s night, four travellers</li><li>☐ one shot</li><li>☐ 神之天平</li><li>☐ 安娜卡塔山</li><li>☐ Order of Sinking Stars</li><li>☐ Else Heart.break()</li></ul><h3>Misc</h3><h3>NixOS</h3><ul><li>self-hosted git services</li><li>j4125 小主机</li></ul></main></div></article></div><footer class="site-footer"><div class="wrap footer-inner"><p>© 2026 Serephus <span class="sep" aria-hidden="true">·</span> Made with <a href="https://github.com/serephus/typost">typost</a> <span class="sep" aria-hidden="true">·</span> <a href="/atom.xml">RSS</a></p></div></footer></body></html>
