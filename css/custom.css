@@ -126,3 +126,40 @@ svg [stroke="#000000"] {
 .content-list .content-link:hover {
   color: var(--color-accent);
 }
+
+.compact .title-list {
+  overflow: hidden;
+  padding-block: var(--space-2);
+}
+
+.compact .content-link {
+  flex: 0 0 auto;
+  font-size: 0.98rem;
+  white-space: nowrap;
+}
+
+.compact .post-tags {
+  flex: 1 1 0;
+  justify-content: flex-end;
+  max-height: 1.4rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 44rem) {
+  .compact .content-link {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .compact .post-tags {
+    flex: 0 0 auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .compact .post-tags .tag:not(:first-child) {
+    display: none;
+  }
+}
